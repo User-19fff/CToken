@@ -1,4 +1,4 @@
-package net.coma112.ctemplate.processor;
+package net.coma112.ctoken.processor;
 
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +19,7 @@ public class MessageProcessor {
             String replaceSharp = hexCode.replace('#', 'x');
 
             StringBuilder builder = new StringBuilder();
+
             for (char c : replaceSharp.toCharArray()) builder.append("&").append(c);
 
             message = message.replace(hexCode, builder.toString());

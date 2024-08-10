@@ -4,27 +4,21 @@ plugins {
     id 'io.github.goooler.shadow' version '8.1.7'
 }
 
-group = 'net.coma112.ctoken'
+group = 'net.coma112.CToken'
 version = '1.0'
 
 repositories {
     mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
-    maven {
-        url 'https://jitpack.io'
-    }
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
+    maven { url = "https://oss.sonatype.org/content/groups/public/" }
+    maven { url 'https://jitpack.io' }
+    maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
+    compileOnly 'me.clip:placeholderapi:2.11.3'
     implementation 'com.github.Revxrsal.Lamp:common:3.2.1'
     implementation 'com.github.Revxrsal.Lamp:bukkit:3.2.1'
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
@@ -43,6 +37,7 @@ compileJava {
 }
 
 shadowJar {
+    relocate 'com.github.Anon8281.universalScheduler', 'net.coma112.CToken'
     minimize()
 }
 

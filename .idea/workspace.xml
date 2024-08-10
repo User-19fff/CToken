@@ -5,35 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/BadgeType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/FormatType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceChangeEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/hooks/PlaceholderAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/hooks/Webhook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/manager/TokenTop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/ctoken.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/CTemplate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/commands/CommandTemplate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/config/Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/database/AbstractDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/database/MySQL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/database/SQLite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/enums/DatabaseType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/enums/LanguageType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/enums/keys/ConfigKeys.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/enums/keys/ItemKeys.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/enums/keys/MessageKeys.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/item/IItemBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/item/ItemBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/language/Language.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/listener/JoinListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/menu/Menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/menu/MenuListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/menu/MenuUpdater.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/menu/PaginatedMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/menu/menus/PaginatedMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/processor/MessageProcessor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/utils/ConfigUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/utils/MenuUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/utils/RegisterUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/utils/StartingUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctemplate/utils/TemplateLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CTemplate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandTemplate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/DatabaseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/DatabaseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/LanguageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/LanguageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ItemKeys.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/IItemBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/language/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/language/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listener/JoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listener/GlobalListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/MenuListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/MenuUpdater.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/PaginatedMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/menus/PaginatedMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/processor/MessageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/processor/MessageProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/MenuUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TemplateLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/token.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +65,23 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CToken" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CToken" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CToken" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -64,8 +92,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
+        <option value="Record" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,6 +115,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.CTemplate [wrapper].executor": "Run",
+    "Gradle.CToken [shadowJar].executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -98,10 +128,33 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="CToken [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="shadowJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="CTemplate.main" />
       <method v="2">
@@ -115,6 +168,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.CToken [shadowJar]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -139,7 +197,8 @@
       <workItem from="1721578680647" duration="1120000" />
       <workItem from="1721667523087" duration="723000" />
       <workItem from="1722372654675" duration="1317000" />
-      <workItem from="1723274135708" duration="32000" />
+      <workItem from="1723274135708" duration="464000" />
+      <workItem from="1723274612156" duration="9223000" />
     </task>
     <servers />
   </component>

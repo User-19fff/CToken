@@ -1,11 +1,11 @@
-package net.coma112.ctemplate.config;
+package net.coma112.ctoken.config;
 
-import net.coma112.ctemplate.CTemplate;
-import net.coma112.ctemplate.utils.ConfigUtils;
+import net.coma112.ctoken.CToken;
+import net.coma112.ctoken.utils.ConfigUtils;
 
 public class Config extends ConfigUtils {
     public Config() {
-        super(CTemplate.getInstance().getDataFolder().getPath(), "config");
+        super(CToken.getInstance().getDataFolder().getPath(), "config");
         save();
     }
 }

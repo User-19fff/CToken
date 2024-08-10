@@ -1,4 +1,4 @@
-package net.coma112.ctemplate.enums;
+package net.coma112.ctoken.enums;
 
 public enum LanguageType {
     en, EN

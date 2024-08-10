@@ -1,36 +1,68 @@
-language: "en"
+#####################################################################
+# +---------------------------------------------------------------+ #
+# |                       Basic Settings                          | #
+# +---------------------------------------------------------------+ #
+#####################################################################
+
+language: "en" # Supported languages -> hu, de, en, tr, es
+
 database:
-  type: "sqlite"
+  type: "sqlite" # Supported database types -> sqlite, mysql
   mysql:
-    host: localhost
+    host: "localhost"
     port: 3306
-    database: template
-    username: root
+    database: "coma112"
+    username: "root"
     password: ""
+    # You shouldn't touch this part except if you are familiar with it.
     ssl: false
     certificateverification: false
     poolsize: 10
     lifetime: 1800000
 
-test-item:
-  material: "STICK"
-  amount: 2
-  name: "&cTest Stick"
-  lore:
-    - ""
-    - "HOMIXIDE GANG"
+##########################################################################
+# +--------------------------------------------------------------------+ #
+# |                       Formatting settings                          | #
+# +------------------------------------------------------------------- + #
+##########################################################################
 
-menu:
-  title: "&6&lCTemplate menu"
-  size: 54
-  update-tick: 2
-  back-item:
-    amount: 1
-    material: "RED_STAINED_GLASS"
-    name: "&cBack"
-    slot: 45
-  forward-item:
-    amount: 1
-    material: "GREEN_STAINED_GLASS"
-    name: "&aForward"
-    slot: 53
+formatting:
+  enabled: true
+  type: dot
+  basic:
+    '1000': K
+    '1000000': M
+    '1000000000': B
+    '1000000000000': T
+
+# Types
+
+# dot = 1.000.000
+# commas = 1,000,000
+# basic = 1M
+
+###############################################################
+# +---------------------------------------------------------+ #
+# |                       FEATURES                          | #
+# +-------------------------------------------------------- + #
+###############################################################
+
+features:
+  badges:
+    enabled: true
+    multiplier: 0.5 # Token * Mutliplier = XP | Example: 50 Token = 25 XP
+
+    # Displaynames
+    novice: "Novice"
+    beginner: "Beginner"
+    competence: "Competence"
+    proficient: "Proficient"
+    expert: "Expert"
+
+    # XP Limits
+    limit:
+      novice: 1000
+      beginner: 2000
+      competence: 3000
+      proficient: 4000
+      expert: 5000

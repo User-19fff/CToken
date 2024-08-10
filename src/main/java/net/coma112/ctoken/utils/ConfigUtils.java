@@ -1,7 +1,7 @@
-package net.coma112.ctemplate.utils;
+package net.coma112.ctoken.utils;
 
 import lombok.Getter;
-import net.coma112.ctemplate.processor.MessageProcessor;
+import net.coma112.ctoken.processor.MessageProcessor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +30,7 @@ public class ConfigUtils {
             try {
                 if (!config.createNewFile()) return;
             } catch (IOException exception) {
-                TemplateLogger.error(exception.getMessage());
+                TokenLogger.error(exception.getMessage());
             }
         }
 
@@ -53,7 +53,7 @@ public class ConfigUtils {
         try {
             yml.save(config);
         } catch (IOException exception) {
-            TemplateLogger.error(exception.getMessage());
+            TokenLogger.error(exception.getMessage());
         }
     }
 

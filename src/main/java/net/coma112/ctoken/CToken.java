@@ -1,49 +1,51 @@
-package net.coma112.ctemplate;
+package net.coma112.ctoken;
 
 import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import lombok.Getter;
-import net.coma112.ctemplate.config.Config;
-import net.coma112.ctemplate.database.AbstractDatabase;
-import net.coma112.ctemplate.database.MySQL;
-import net.coma112.ctemplate.database.SQLite;
-import net.coma112.ctemplate.enums.DatabaseType;
-import net.coma112.ctemplate.enums.LanguageType;
-import net.coma112.ctemplate.enums.keys.ConfigKeys;
-import net.coma112.ctemplate.enums.keys.MessageKeys;
-import net.coma112.ctemplate.language.Language;
-import net.coma112.ctemplate.utils.TemplateLogger;
+import net.coma112.ctoken.config.Config;
+import net.coma112.ctoken.database.AbstractDatabase;
+import net.coma112.ctoken.database.MySQL;
+import net.coma112.ctoken.database.SQLite;
+import net.coma112.ctoken.enums.DatabaseType;
+import net.coma112.ctoken.enums.LanguageType;
+import net.coma112.ctoken.enums.keys.ConfigKeys;
+import net.coma112.ctoken.hooks.PlaceholderAPI;
+import net.coma112.ctoken.language.Language;
+import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
 import java.util.Objects;
 
-import static net.coma112.ctemplate.utils.StartingUtils.registerListenersAndCommands;
-import static net.coma112.ctemplate.utils.StartingUtils.saveResourceIfNotExists;
+import static net.coma112.ctoken.utils.StartingUtils.*;
 
-public final class CTemplate extends JavaPlugin {
-    @Getter private static CTemplate instance;
-    @Getter private static AbstractDatabase database;
-    private Config config;
+public final class CToken extends JavaPlugin {
+    @Getter
+    private static CToken instance;
+    @Getter
+    private static AbstractDatabase database;
     @Getter
     private Language language;
-
     @Getter
     private TaskScheduler scheduler;
+    private Config config;
 
     @Override
     public void onLoad() {
         instance = this;
+        scheduler = UniversalScheduler.getScheduler(this);
     }
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        scheduler = UniversalScheduler.getScheduler(this);
         initializeComponents();
         registerListenersAndCommands();
         initializeDatabaseManager();
-        TemplateLogger.info(MessageKeys.TEST.getMessage());
+        loadBasicFormatOverrides();
+
+        new PlaceholderAPI().register();
     }
 
     @Override
@@ -80,7 +82,7 @@ public final class CTemplate extends JavaPlugin {
                 }
             }
         } catch (SQLException | ClassNotFoundException exception) {
-            TemplateLogger.error(exception.getMessage());
+            TokenLogger.error(exception.getMessage());
         }
     }
 }

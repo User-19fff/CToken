@@ -1,6 +1,5 @@
-name: CTemplate
+name: CToken
 version: '1.0'
-main: net.coma112.CTemplate
+main: net.coma112.ctoken.CToken
 api-version: '1.21'
-authors: [ Coma112 & B3rcyy ]
-description: A template plugin.
+authors: [ Coma112 ]

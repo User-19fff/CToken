@@ -1,7 +1,7 @@
-package net.coma112.ctemplate.enums.keys;
+package net.coma112.ctoken.enums.keys;
 
-import net.coma112.ctemplate.CTemplate;
-import net.coma112.ctemplate.processor.MessageProcessor;
+import net.coma112.ctoken.CToken;
+import net.coma112.ctoken.processor.MessageProcessor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public enum MessageKeys {
     }
 
     public String getMessage() {
-        return MessageProcessor.process(CTemplate.getInstance().getLanguage().getString(path));
+        return MessageProcessor.process(CToken.getInstance().getLanguage().getString(path));
     }
 
     public List<String> getMessages() {
-        return CTemplate.getInstance().getLanguage().getList(path)
+        return CToken.getInstance().getLanguage().getList(path)
                 .stream()
                 .map(MessageProcessor::process)
                 .toList();
