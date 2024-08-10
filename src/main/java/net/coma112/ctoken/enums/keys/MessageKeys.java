@@ -7,9 +7,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public enum MessageKeys {
-    TEST("message.test"),
-    LAST_PAGE("message.last-page"),
-    FIRST_PAGE("message.first-page"),
+    RELOAD("message.reload"),
+    INVALID_VALUE("message.invalid-value"),
+    TARGET_DONT_EXIST("message.target-dont-exists"),
+    ADD_SENDER("message.add-sender"),
+    ADD_TARGET("message.add-target"),
+    ADD_EVERYONE_SENDER("message.add-everyone-sender"),
+    NOT_ENOUGH_TOKEN("message.not-enough-token"),
+    PAY_SENDER("message.pay-sender"),
+    PAY_TARGET("message.pay-target"),
+    RESET_EVERYONE_SENDER("message.reset-everyone-sender"),
+    RESET_SENDER("message.reset-sender"),
+    RESET_TARGET("message.reset-target"),
+    SET_SENDER("message.set-sender"),
+    SET_TARGET("message.set-target"),
+    TAKE_SENDER("message.take-sender"),
+    TAKE_TARGET("message.take-target"),
+    BALANCE("message.balance"),
     HELP("message.help");
 
     private final String path;
@@ -28,5 +42,5 @@ public enum MessageKeys {
                 .map(MessageProcessor::process)
                 .toList();
     }
-
 }
+

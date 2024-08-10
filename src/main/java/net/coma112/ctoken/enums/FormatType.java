@@ -14,7 +14,7 @@ public enum FormatType {
     COMMAS, commas,
     DOT, dot;
 
-    public static String formatPrice(int price) {
+    public static String format(int price) {
         if (!ConfigKeys.FORMATTING_ENABLED.getBoolean()) return String.valueOf(price);
 
         return switch (FormatType.valueOf(ConfigKeys.FORMATTING_TYPE.getString())) {

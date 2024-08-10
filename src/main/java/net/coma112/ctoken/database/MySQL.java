@@ -90,13 +90,14 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public void createPlayer(@NotNull OfflinePlayer player) {
-        String query = "INSERT INTO token (PLAYER, XP) VALUES (?, ?)";
+        String query = "INSERT INTO token (PLAYER, BALANCE, XP) VALUES (?, ?, ?)";
 
         try {
             if (!exists(player)) {
                 try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
                     preparedStatement.setString(1, player.getName());
-                    preparedStatement.setInt(2, calculateXPFromTokens(0));
+                    preparedStatement.setInt(2, ConfigKeys.STARTING_BALANCE.getInt());
+                    preparedStatement.setInt(3, calculateXPFromTokens(ConfigKeys.STARTING_BALANCE.getInt()));
                     preparedStatement.executeUpdate();
                 }
             }

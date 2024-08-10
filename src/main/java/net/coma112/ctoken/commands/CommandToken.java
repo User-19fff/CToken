@@ -15,6 +15,8 @@ import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 
+import java.util.Objects;
+
 @Command({"ctoken", "token"})
 @SuppressWarnings("deprecation")
 public class CommandToken {
@@ -35,65 +37,84 @@ public class CommandToken {
     public void reload(@NotNull CommandSender sender) {
         CToken.getInstance().getLanguage().reload();
         CToken.getInstance().getConfiguration().reload();
-        sender.sendMessage("reload");
+        sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 
     @Subcommand("add")
     @CommandPermission("ctoken.add")
     public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
         if (value <= 0) {
-            sender.sendMessage("Invalid value");
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
             return;
         }
 
         if (input.equals("*")) {
             CToken.getDatabase().addToEveryoneBalance(value);
-            sender.sendMessage("Added " + value + " to everyone");
+            sender.sendMessage(MessageKeys.ADD_EVERYONE_SENDER
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
         }
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
         if (!target.hasPlayedBefore()) {
-            sender.sendMessage("nincsen");
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
         CToken.getDatabase().addToBalance(target, value);
-        sender.sendMessage("Added " + value + " to " + target.getName());
+        sender.sendMessage(MessageKeys.ADD_SENDER
+                .getMessage()
+                .replace("{value}", FormatType.format(value))
+                .replace("{target}", input));
     }
 
     @Subcommand("balance")
     @CommandPermission("ctoken.balance")
     public void balance(@NotNull CommandSender sender, @NotNull @Default("me") OfflinePlayer target) {
         if (!target.hasPlayedBefore()) {
-            sender.sendMessage("nincsen");
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
-        sender.sendMessage(FormatType.formatPrice(CToken.getDatabase().getBalance(target)));
+        sender.sendMessage(MessageKeys.BALANCE
+                .getMessage()
+                .replace("{target}", Objects.requireNonNull(target.getName()))
+                .replace("{balance}", FormatType.format(CToken.getDatabase().getBalance(target))));
     }
 
     @Subcommand("pay")
     @CommandPermission("ctoken.pay")
     public void pay(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
-            player.sendMessage("nincsen");
+            player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
         if (value <= 0) {
-            player.sendMessage("Invalid value");
+            player.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
             return;
         }
 
         if (CToken.getDatabase().getBalance(target) < value) {
-            player.sendMessage("not enough token");
+            player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
             return;
         }
 
         CToken.getDatabase().addToBalance(target, value);
         CToken.getDatabase().takeFromBalance(player, value);
-        player.sendMessage("Added " + value + " to " + target.getName());
+        player.sendMessage(MessageKeys.PAY_SENDER
+                .getMessage()
+                .replace("{value}", FormatType.format(value))
+                .replace("{target}", Objects.requireNonNull(target.getName())));
+        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.PAY_TARGET
+                .getMessage()
+                .replace("{player}", player.getName())
+                .replace("{value}", FormatType.format(value)));
     }
 
     @Subcommand("reset")
@@ -101,60 +122,81 @@ public class CommandToken {
     public void reset(@NotNull CommandSender sender, @NotNull String input) {
         if (input.equals("*")) {
             CToken.getDatabase().resetEveryone();
-            sender.sendMessage("reset *");
+            sender.sendMessage(MessageKeys.RESET_EVERYONE_SENDER.getMessage());
             return;
         }
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
         if (!target.hasPlayedBefore()) {
-            sender.sendMessage("nincsen");
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
         CToken.getDatabase().resetBalance(target);
-        sender.sendMessage("reset " + target.getName());
+        sender.sendMessage(MessageKeys.RESET_SENDER
+                .getMessage()
+                .replace("{target}", Objects.requireNonNull(target.getName())));
+        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.RESET_TARGET.getMessage());
     }
 
     @Subcommand("set")
     @CommandPermission("ctoken.set")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
-            sender.sendMessage("nincsen");
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
         if (value <= 0) {
-            sender.sendMessage("Invalid value");
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
             return;
         }
 
         CToken.getDatabase().setBalance(target, value);
-        sender.sendMessage("set " + value + " to " + target.getName());
+        sender.sendMessage(MessageKeys.SET_SENDER
+                .getMessage()
+                .replace("{value}", FormatType.format(value))
+                .replace("{target}", Objects.requireNonNull(target.getName())));
+        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.SET_TARGET
+                .getMessage()
+                .replace("{value}", FormatType.format(value)));
     }
 
     @Subcommand("take")
     @CommandPermission("ctoken.take")
     public void take(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
-            sender.sendMessage("nincsen");
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
 
         if (value <= 0) {
-            sender.sendMessage("Invalid value");
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
             return;
         }
 
         CToken.getDatabase().takeFromBalance(target, value);
-        sender.sendMessage("take " + value + " to " + target.getName());
+        sender.sendMessage(MessageKeys.TAKE_SENDER
+                .getMessage()
+                .replace("{value}", FormatType.format(value))
+                .replace("{target}", Objects.requireNonNull(target.getName())));
+        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.TAKE_TARGET
+                .getMessage()
+                .replace("{value}", FormatType.format(value)));
     }
 
     @Subcommand("top")
     @CommandPermission("ctoken.top")
     public void top(@NotNull CommandSender sender, @Default("5") int value) {
         if (value <= 0) {
-            sender.sendMessage("Invalid value");
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
             return;
         }
 

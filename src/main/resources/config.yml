@@ -5,6 +5,7 @@
 #####################################################################
 
 language: "en" # Supported languages -> hu, de, en, tr, es
+starting-balance: 500
 
 database:
   type: "sqlite" # Supported database types -> sqlite, mysql

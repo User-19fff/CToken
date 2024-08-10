@@ -14,7 +14,7 @@ public final class StartingUtils {
     public static final Map<Long, String> basicFormatOverrides = new ConcurrentHashMap<>();
 
     public static void registerListenersAndCommands() {
-        RegisterUtils.registerEvents();
+        RegisterUtils.registerListeners();
         RegisterUtils.registerCommands();
     }
 
@@ -29,10 +29,7 @@ public final class StartingUtils {
         if (section != null) {
             section.getKeys(false).forEach(key -> {
                 try {
-                    long value = Long.parseLong(key);  // Change to long
-                    String format = section.getString(key);
-
-                    basicFormatOverrides.put(value, format);  // Map should also be long to String
+                    basicFormatOverrides.put(Long.parseLong(key), section.getString(key));
                 } catch (NumberFormatException exception) {
                     TokenLogger.error("Invalid formatting key: " + key);
                 }

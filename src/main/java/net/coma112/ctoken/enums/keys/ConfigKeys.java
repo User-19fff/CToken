@@ -9,6 +9,7 @@ public enum ConfigKeys {
     DATABASE("database.type"),
     FORMATTING_ENABLED("formatting.enabled"),
     FORMATTING_TYPE("formatting.type"),
+    STARTING_BALANCE("starting-balance"),
 
     BADGES_ENABLED("features.badges.enabled"),
     BADGES_MULTIPLIER("features.badges.multiplier");

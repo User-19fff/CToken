@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class RegisterUtils {
-    public static void registerEvents() {
+    public static void registerListeners() {
         getListenerClasses().forEach(clazz -> {
             try {
                 CToken.getInstance().getServer().getPluginManager().registerEvents(clazz.getDeclaredConstructor().newInstance(), CToken.getInstance());

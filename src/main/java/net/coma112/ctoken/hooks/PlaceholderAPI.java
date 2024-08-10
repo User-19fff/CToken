@@ -52,7 +52,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             try {
                 int pos = Integer.parseInt(params.split("_")[1]);
 
-                if (CToken.getDatabase().getTopBalance(pos) != 0) return String.valueOf(CToken.getDatabase().getTopBalance(pos));
+                if (CToken.getDatabase().getTopBalance(pos) != 0) return FormatType.format(CToken.getDatabase().getTopBalance(pos));
                 return "---";
             } catch (Exception exception) {
                 return "";
@@ -60,14 +60,14 @@ public class PlaceholderAPI extends PlaceholderExpansion {
         }
 
         return switch (params) {
-            case "balance" -> FormatType.formatPrice(CToken.getDatabase().getBalance(player));
+            case "balance" -> FormatType.format(CToken.getDatabase().getBalance(player));
 
             case "badge" -> {
                 if (ConfigKeys.BADGES_ENABLED.getBoolean()) yield BadgeType.convertXPToBadge(CToken.getDatabase().getXP(player)).getDisplayName();
                 yield "----";
             }
 
-            case "xp" -> FormatType.formatPrice(CToken.getDatabase().getXP(player));
+            case "xp" -> FormatType.format(CToken.getDatabase().getXP(player));
 
             default -> "";
         };

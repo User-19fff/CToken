@@ -1,7 +1,32 @@
 message:
-  test: "Test Message!"
   help:
-    - "Help Message 1"
-    - "Help Message 2"
-  last-page: "This is the last page"
-  first-page: "This is the first page"
+    - '&8&l━━━━━━━━━━━━━━━━━━━━━━[━━&e&lCTOKEN&8&l━━]━━━━━━━━━━━━━━━━━━━━━━'
+    - ''
+    - '&e/ctoken reload &f- &7Reloads the plugin.'
+    - '&e/ctoken add &7(&etarget &7or &e*&7) &7(&evalue&7) &f- &7Adds the value to the
+      target''s balance'
+    - '&e/ctoken balance &7(&etarget&7) &f- &7Gets the balance of the target.'
+    - '&e/ctoken pay &7(&etarget&7) &7(&evalue&7) &f- &7Pays to the target.'
+    - '&e/ctoken reset &7(&etarget &7or &e*&7) &f- &7Resets the balance of the target.'
+    - '&e/ctoken set &7(&etarget&7) &7(&evalue&7) &f- &7Sets the balance of the target.'
+    - '&e/ctoken take &7(&etarget&7) &7(&evalue&7) &f- &7Takes from the target''s balance.'
+    - '&e/ctoken top &7(&evalue&7) &f- &7Gets the leaderboard.'
+    - ''
+    - '&8&l━━━━━━━━━━━━━━━━━━━━━━[━━&e&lCTOKEN&8&l━━]━━━━━━━━━━━━━━━━━━━━━━'
+  reload: "&e&lTOKEN &8| &aI have successfully reloaded the files!"
+  invalid-value: "&e&lTOKEN &8| &c{value} is an incorrect value!"
+  target-dont-exists: "&e&lTOKEN &8| &cTarget does not exist!"
+  add-sender: "&e&lTOKEN &8| &aYou have successfully added a &2{value} &atoken to your &2{target} &abalance!"
+  add-target: "&e&lTOKEN &8| &2{value} &ahas been added to your balance!"
+  add-everyone-sender: "&e&lTOKEN &8| &aYou have successfully added &2{value} &ato everyone's balance!"
+  not-enough-token: "&e&lTOKEN &8| &cYou don't have enough tokens!"
+  pay-sender: "&e&lTOKEN &8| &aYou have successfully transferred a &2{value} &atoken to &2{target}&a!"
+  pay-target: "&e&lTOKEN &8| &2{player} &ahas sent you &2{value} &atoken!"
+  reset-everyone-sender: "&e&lTOKEN &8| &aYou have successfully reset everyone's balance!"
+  reset-sender: "&e&lTOKEN &8| &aYou have successfully reset your &2{target} &abalance!"
+  reset-target: "&e&lTOKEN &8| &cYour balance has been reset!"
+  set-sender: "&e&lTOKEN &8| &aYou have successfully set the balance of &2{target} &ato &2{value}&a!"
+  set-target: "&e&lTOKEN &8| &aYour balance has been set to &2{value}&a!"
+  take-sender: "&e&lTOKEN &8| &aYou have successfully taken &2{value} &afrom &2{target}&a!"
+  take-target: "&e&lTOKEN &8| &2{value} &ahas been taken from your balance"
+  balance: "&e&lTOKEN &8| &2{target}&a's balance is &2{balance}&a."
