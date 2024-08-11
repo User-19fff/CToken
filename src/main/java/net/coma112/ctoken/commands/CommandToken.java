@@ -3,6 +3,7 @@ package net.coma112.ctoken.commands;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
+import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.manager.TokenTop;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -15,6 +16,8 @@ import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 @Command({"ctoken", "token"})
@@ -42,7 +45,7 @@ public class CommandToken {
 
     @Subcommand("add")
     @CommandPermission("ctoken.add")
-    public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
+    public void add(@NotNull CommandSender sender, @NotNull String input, int value) throws IOException, URISyntaxException {
         if (value <= 0) {
             sender.sendMessage(MessageKeys.INVALID_VALUE
                     .getMessage()
@@ -55,6 +58,8 @@ public class CommandToken {
             sender.sendMessage(MessageKeys.ADD_EVERYONE_SENDER
                     .getMessage()
                     .replace("{value}", FormatType.format(value)));
+            Webhook.sendWebhookFromString("webhook.balance-add-all-embed", null);
+            return;
         }
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
@@ -119,10 +124,11 @@ public class CommandToken {
 
     @Subcommand("reset")
     @CommandPermission("ctoken.reset")
-    public void reset(@NotNull CommandSender sender, @NotNull String input) {
+    public void reset(@NotNull CommandSender sender, @NotNull String input) throws IOException, URISyntaxException {
         if (input.equals("*")) {
             CToken.getDatabase().resetEveryone();
             sender.sendMessage(MessageKeys.RESET_EVERYONE_SENDER.getMessage());
+            Webhook.sendWebhookFromString("webhook.balance-reset-all-embed", null);
             return;
         }
 

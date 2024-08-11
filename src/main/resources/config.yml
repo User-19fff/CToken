@@ -67,3 +67,90 @@ features:
       competence: 3000
       proficient: 4000
       expert: 5000
+
+###############################################################
+# +---------------------------------------------------------+ #
+# |                       WEBHOOKS                          | #
+# +-------------------------------------------------------- + #
+###############################################################
+
+
+webhook:
+  balance-add-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE ADD"
+    description: "**{player}** Added: **{addedAmount}** Old Balance: **{oldBalance}**"
+    color: "YELLOW"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  balance-reset-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE RESET"
+    description: "**{player}**'s balance has been reset. Old Balance: **{oldBalance}**"
+    color: "YELLOW"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  balance-set-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE SET"
+    description: "**{player}** New Balance: **{newBalance}** Old Balance: **{oldBalance}**"
+    color: "YELLOW"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  balance-take-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE ADD"
+    description: "**{player}** New Balance: **{takenAmount}** Old Balance: **{oldBalance}**"
+    color: "YELLOW"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  balance-reset-all-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE ADD"
+    description: "Everyone's balance has been reset!"
+    color: "RED"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  balance-add-all-embed:
+    enabled: false
+    url: "WEBHOOK URL HERE"
+    title: "BALANCE ADD"
+    description: "**{value}** has been added to everyone's balance"
+    color: "RED"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CTOKEN"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""

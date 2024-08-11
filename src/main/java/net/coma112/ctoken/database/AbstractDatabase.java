@@ -1,10 +1,11 @@
 package net.coma112.ctoken.database;
 
-import net.coma112.ctoken.events.BalanceChangeEvent;
 import net.coma112.ctoken.manager.TokenTop;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public abstract class AbstractDatabase {
@@ -43,6 +44,4 @@ public abstract class AbstractDatabase {
     public abstract void takeFromBalance(@NotNull OfflinePlayer player, int newBalance);
 
     public abstract int calculateXPFromTokens(int tokenBalance);
-
-    public abstract void handleBalanceChangeEvent(BalanceChangeEvent event);
 }

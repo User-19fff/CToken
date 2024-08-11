@@ -3,10 +3,8 @@ package net.coma112.ctoken.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
-import net.coma112.ctoken.enums.BadgeType;
-import net.coma112.ctoken.enums.FormatType;
+import net.coma112.ctoken.api.events.*;
 import net.coma112.ctoken.enums.keys.ConfigKeys;
-import net.coma112.ctoken.events.BalanceChangeEvent;
 import net.coma112.ctoken.manager.TokenTop;
 import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.Bukkit;
@@ -14,8 +12,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -238,42 +237,17 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public void setBalance(@NotNull OfflinePlayer player, int newBalance) {
-        String query = "UPDATE token SET BALANCE = ?, XP = ? WHERE PLAYER = ?";
         int oldBalance = getBalance(player);
-
-        try {
-            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
-                preparedStatement.setInt(1, newBalance);
-                preparedStatement.setInt(2, calculateXPFromTokens(newBalance));
-                preparedStatement.setString(3, player.getName());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException exception) {
-            TokenLogger.error(exception.getMessage());
-        }
-
-        Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(player, oldBalance, newBalance - oldBalance));
+        updateBalance(player.getName(), newBalance);
+        Bukkit.getServer().getPluginManager().callEvent(new BalanceSetEvent(player, oldBalance, newBalance));
     }
 
     @Override
     public void addToBalance(@NotNull OfflinePlayer player, int newBalance) {
-        String query = "UPDATE token SET BALANCE = ?, XP = ? WHERE PLAYER = ?";
         int oldBalance = getBalance(player);
-
-        try {
-            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
-                int updatedBalance = getBalance(player) + newBalance;
-
-                preparedStatement.setInt(1, updatedBalance);
-                preparedStatement.setInt(2, calculateXPFromTokens(updatedBalance));
-                preparedStatement.setString(3, player.getName());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException exception) {
-            TokenLogger.error(exception.getMessage());
-        }
-
-        Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(player, oldBalance, oldBalance + newBalance));
+        int updatedBalance = oldBalance + newBalance;
+        updateBalance(player.getName(), updatedBalance);
+        Bukkit.getServer().getPluginManager().callEvent(new BalanceAddEvent(player, oldBalance, newBalance));
     }
 
     @Override
@@ -290,7 +264,6 @@ public class MySQL extends AbstractDatabase {
                     int updatedBalance = currentBalance + newBalance;
 
                     updateBalance(playerName, updatedBalance);
-                    Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(Bukkit.getOfflinePlayer(playerName), currentBalance, updatedBalance));
                 }
             }
         } catch (SQLException exception) {
@@ -300,41 +273,18 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public void resetBalance(@NotNull OfflinePlayer player) {
-        String query = "UPDATE token SET BALANCE = ? WHERE PLAYER = ?";
         int oldBalance = getBalance(player);
-
-        try {
-            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
-                preparedStatement.setNull(1, Types.INTEGER);
-                preparedStatement.setString(2, player.getName());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException exception) {
-            TokenLogger.error(exception.getMessage());
-        }
-
-        Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(player, oldBalance, 0));
+        updateBalance(player.getName(), 0);
+        Bukkit.getServer().getPluginManager().callEvent(new BalanceResetEvent(player, oldBalance));
     }
+
 
     @Override
     public void resetEveryone() {
-        String query = "SELECT PLAYER, BALANCE FROM token";
+        String query = "UPDATE token SET BALANCE = 0, XP = 0";
 
-        try {
-            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                while (resultSet.next()) {
-                    String playerName = resultSet.getString("PLAYER");
-                    int currentBalance = resultSet.getInt("BALANCE");
-                    int newBalance = 0;
-
-                    if (currentBalance != newBalance) {
-                        updateBalance(playerName, newBalance);
-                        Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(Bukkit.getOfflinePlayer(playerName), currentBalance, newBalance));
-                    }
-                }
-            }
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+            preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             TokenLogger.error(exception.getMessage());
         }
@@ -342,31 +292,15 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public void takeFromBalance(@NotNull OfflinePlayer player, int newBalance) {
-        String query = "UPDATE token SET BALANCE = ? WHERE PLAYER = ?";
         int oldBalance = getBalance(player);
-
-        try {
-            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
-                preparedStatement.setInt(1, oldBalance - newBalance);
-                preparedStatement.setString(2, player.getName());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException exception) {
-            TokenLogger.error(exception.getMessage());
-        }
-
-        Bukkit.getServer().getPluginManager().callEvent(new BalanceChangeEvent(player, oldBalance, oldBalance - newBalance));
+        int updatedBalance = oldBalance - newBalance;
+        updateBalance(player.getName(), updatedBalance);
+        Bukkit.getServer().getPluginManager().callEvent(new BalanceTakeEvent(player, oldBalance, newBalance));
     }
 
     @Override
     public int calculateXPFromTokens(int tokenBalance) {
         return (int) (tokenBalance * ConfigKeys.BADGES_MULTIPLIER.getDouble());
-    }
-
-    @Override
-    public void handleBalanceChangeEvent(@NotNull final BalanceChangeEvent event) {
-        calculateXPFromTokens(event.getOldBalance());
-        calculateXPFromTokens(event.getNewBalance());
     }
 
     private void updateBalance(String playerName, int newBalance) {

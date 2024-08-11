@@ -2,7 +2,8 @@ package net.coma112.ctoken.utils;
 
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.commands.CommandToken;
-import net.coma112.ctoken.listener.GlobalListener;
+import net.coma112.ctoken.listener.JoinListener;
+import net.coma112.ctoken.listener.WebhookListener;
 import org.bukkit.event.Listener;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
 
@@ -30,7 +31,8 @@ public final class RegisterUtils {
     private static Set<Class<? extends Listener>> getListenerClasses() {
         Set<Class<? extends Listener>> listenerClasses = new HashSet<>();
 
-        listenerClasses.add(GlobalListener.class);
+        listenerClasses.add(JoinListener.class);
+        listenerClasses.add(WebhookListener.class);
 
         return listenerClasses;
     }
