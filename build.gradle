@@ -2,10 +2,11 @@ plugins {
     id 'java'
     id 'io.freefair.lombok' version "8.6"
     id 'io.github.goooler.shadow' version '8.1.7'
+    id 'maven-publish'
 }
 
 group = 'net.coma112.CToken'
-version = '1.0'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -28,7 +29,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -46,3 +47,15 @@ tasks.build {
     dependsOn shadowJar
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact shadowJar // Shadow JAR hozzáadása
+        }
+    }
+    repositories {
+        maven {
+            url = uri('https://jitpack.io')
+        }
+    }
+}
