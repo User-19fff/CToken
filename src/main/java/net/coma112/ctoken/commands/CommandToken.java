@@ -6,10 +6,13 @@ import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.manager.TokenTop;
+import net.coma112.ctoken.utils.StartingUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Default;
@@ -19,7 +22,11 @@ import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Command({"ctoken", "token"})
 @SuppressWarnings("deprecation")
@@ -41,6 +48,7 @@ public class CommandToken {
     public void reload(@NotNull CommandSender sender) {
         CToken.getInstance().getLanguage().reload();
         CToken.getInstance().getConfiguration().reload();
+        StartingUtils.loadBasicFormatOverrides();
         sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 
@@ -155,7 +163,7 @@ public class CommandToken {
             return;
         }
 
-        if (value <= 0) {
+        if (value < 0) {
             sender.sendMessage(MessageKeys.INVALID_VALUE
                     .getMessage()
                     .replace("{value}", FormatType.format(value)));
@@ -208,5 +216,111 @@ public class CommandToken {
         }
 
         sender.spigot().sendMessage(TokenTop.getTopDatabase(value));
+    }
+
+    @Subcommand("inventory")
+    @CommandPermission("ctoken.inventory")
+    public void inventory(@NotNull Player player) {
+        Map<String, Integer> prices = new HashMap<>();
+
+        Objects.requireNonNull(CToken.getInstance().getConfiguration().getSection("prices"))
+                .getValues(false)
+                .forEach((key, value) -> prices.put(key, (Integer) value));
+
+        AtomicInteger totalValue = new AtomicInteger(0);
+        StringBuilder inventoryList = new StringBuilder();
+        String headerMessage = MessageKeys.WORTH_HEADER.getMessage();
+
+        inventoryList
+                .append(headerMessage)
+                .append("\n");
+
+        Arrays.stream(player.getInventory().getContents())
+                .filter(Objects::nonNull)
+                .forEach(item -> {
+                    Material material = item.getType();
+                    String materialName = material.name();
+
+                    if (!prices.containsKey(materialName)) return;
+
+                    int itemAmount = item.getAmount();
+                    int itemTotalValue = prices.get(materialName) * itemAmount;
+
+                    totalValue.addAndGet(itemTotalValue);
+
+                    String itemMessage = MessageKeys.WORTH_ITEM.getMessage()
+                            .replace("{item}", materialName.replace("_", " "))
+                            .replace("{amount}", String.valueOf(itemAmount))
+                            .replace("{value}", FormatType.format(itemTotalValue));
+
+                    inventoryList
+                            .append(itemMessage)
+                            .append("\n");
+                });
+
+        if (totalValue.get() > 0) {
+            inventoryList
+                    .append("\n")
+                    .append(MessageKeys.WORTH_TOTAL.getMessage()
+                    .replace("{total}", FormatType.format(totalValue.get())));
+
+            player.sendMessage(inventoryList.toString());
+
+        } else player.sendMessage(MessageKeys.NO_VALUE.getMessage());
+    }
+
+    @Subcommand("sell")
+    @CommandPermission("ctoken.sell")
+    public void sell(@NotNull Player player, @Default("*") String itemName) {
+        Map<String, Integer> prices = new HashMap<>();
+
+        Objects.requireNonNull(CToken.getInstance().getConfiguration().getSection("prices"))
+                .getValues(false)
+                .forEach((key, value) -> prices.put(key, (Integer) value));
+
+        AtomicInteger totalValue = new AtomicInteger(0);
+        AtomicInteger itemsSold = new AtomicInteger(0);
+
+        if (itemName.equals("*")) {
+            Arrays.stream(player.getInventory().getContents())
+                    .filter(Objects::nonNull)
+                    .forEach(item -> {
+                Material material = item.getType();
+                String materialName = material.name();
+
+                if (!prices.containsKey(materialName)) return;
+
+                int itemAmount = item.getAmount();
+
+                totalValue.addAndGet(prices.get(materialName) * itemAmount);
+                itemsSold.addAndGet(itemAmount);
+                player.getInventory().remove(item);
+            });
+
+            player.sendMessage(MessageKeys.SOLD_ALL.getMessage()
+                    .replace("{value}", FormatType.format(totalValue.get())));
+        } else {
+            Arrays.stream(player.getInventory().getContents())
+                    .filter(Objects::nonNull)
+                    .forEach(item -> {
+                Material material = item.getType();
+                String materialName = material.name();
+
+                if (!materialName.equalsIgnoreCase(itemName) || !prices.containsKey(materialName)) return;
+
+                int itemAmount = item.getAmount();
+
+                totalValue.addAndGet(prices.get(materialName) * itemAmount);
+                itemsSold.addAndGet(itemAmount);
+                player.getInventory().remove(item);
+            });
+
+            player.sendMessage(MessageKeys.SOLD_ONE.getMessage()
+                    .replace("{amount}", String.valueOf(itemsSold.get()))
+                    .replace("{material}", itemName)
+                    .replace("{value}", FormatType.format(totalValue.get())));
+        }
+
+        CToken.getDatabase().addToBalance(player, totalValue.get());
     }
 }

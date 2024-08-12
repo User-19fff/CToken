@@ -7,6 +7,14 @@
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/FormatType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/FormatType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_es.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_es.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +49,6 @@
                 <item name="CToken" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CToken" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="publishing" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -97,7 +99,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kulas/Desktop/Projektek/CToken/CToken&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kulas/Downloads/Shield Status/Shield Status&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -107,7 +109,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.CToken [publish]">
+  <component name="RunManager" selected="Gradle.CToken [shadowJar]">
     <configuration name="CToken [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -189,8 +191,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.CToken [publish]" />
         <item itemvalue="Gradle.CToken [shadowJar]" />
+        <item itemvalue="Gradle.CToken [publish]" />
         <item itemvalue="Gradle.CToken [clean]" />
       </list>
     </recent_temporary>
@@ -225,7 +227,12 @@
       <workItem from="1723354607235" duration="36000" />
       <workItem from="1723354655398" duration="4341000" />
       <workItem from="1723445494804" duration="3888000" />
-      <workItem from="1723449654608" duration="132000" />
+      <workItem from="1723449654608" duration="555000" />
+      <workItem from="1723450253322" duration="643000" />
+      <workItem from="1723474040435" duration="58000" />
+      <workItem from="1723497236072" duration="1285000" />
+      <workItem from="1723498672680" duration="767000" />
+      <workItem from="1723499853591" duration="2472000" />
     </task>
     <servers />
   </component>

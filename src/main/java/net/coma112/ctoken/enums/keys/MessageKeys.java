@@ -24,6 +24,13 @@ public enum MessageKeys {
     TAKE_SENDER("message.take-sender"),
     TAKE_TARGET("message.take-target"),
     BALANCE("message.balance"),
+    INVALID_ITEM("message.invalid-item"),
+    SOLD_ONE("message.sold-one"),
+    SOLD_ALL("message.sold-all"),
+    WORTH_HEADER("message.worth.header"),
+    NO_VALUE("message.no-value"),
+    WORTH_ITEM("message.worth.item"),
+    WORTH_TOTAL("message.worth.total"),
     HELP("message.help");
 
     private final String path;

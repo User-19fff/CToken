@@ -22,6 +22,7 @@ public enum FormatType {
             case COMMAS, commas -> String.format("%,d", price);
             case BASIC, basic -> {
                 List<Map.Entry<Long, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
+
                 sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
                 for (Map.Entry<Long, String> entry : sortedEntries) {

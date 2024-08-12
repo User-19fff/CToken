@@ -24,6 +24,8 @@ public final class StartingUtils {
     }
 
     public static void loadBasicFormatOverrides() {
+        if (!basicFormatOverrides.isEmpty()) basicFormatOverrides.clear();
+
         ConfigurationSection section = CToken.getInstance().getConfiguration().getSection("formatting.basic");
 
         if (section != null) {

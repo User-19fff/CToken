@@ -30,3 +30,11 @@ message:
   take-sender: "&e&lTOKEN &8| &aYou have successfully taken &2{value} &afrom &2{target}&a!"
   take-target: "&e&lTOKEN &8| &2{value} &ahas been taken from your balance"
   balance: "&e&lTOKEN &8| &2{target}&a's balance is &2{balance}&a."
+  invalid-item: "&e&lTOKEN &8| &cInvalid Item!"
+  sold-one: "&e&lTOKEN &8| &aYou have successfully sold &2{amount}&ax &2{material} &afor &2{value}&a!"
+  sold-all: "&e&lTOKEN &8| &aYou have successfully every item from your inventory for &2{value}&a!"
+  no-value: "&e&lTOKEN &8| &cYou have no valuable items in your inventory."
+  worth:
+    header: "&eInventory value:"
+    item: "&7- &e{item} &7(&e{amount}&fx&7) - &e{value}"
+    total: "&fTotal: &e{total}"

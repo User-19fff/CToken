@@ -1,6 +1,7 @@
 package net.coma112.ctoken.utils;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.coma112.ctoken.processor.MessageProcessor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,7 +15,8 @@ import java.util.stream.Collectors;
 
 public class ConfigUtils {
     @Getter private YamlConfiguration yml;
-    @Getter private String name;
+    @Getter @Setter
+    private String name;
     private File config;
 
     public ConfigUtils(@NotNull String dir, @NotNull String name) {
@@ -44,7 +46,7 @@ public class ConfigUtils {
         save();
     }
 
-    public void set(@NotNull String path, Object value) {
+    public void set(@NotNull String path, @NotNull Object value) {
         yml.set(path, value);
         save();
     }
@@ -85,10 +87,6 @@ public class ConfigUtils {
 
     public @Nullable ConfigurationSection getSection(@NotNull String path) {
         return yml.getConfigurationSection(path);
-    }
-
-    public void setName(@NotNull String name) {
-        this.name = name;
     }
 }
 
