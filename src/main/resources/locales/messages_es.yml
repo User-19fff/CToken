@@ -1,0 +1,31 @@
+message:
+  help:
+    - '&8&l━━━━━━━━━━━━━━━━━━━━━━[━━&e&lCTOKEN&8&l━━]━━━━━━━━━━━━━━━━━━━━━━'
+    - ''
+    - '&e/ctoken reload &f- &7Recarga el plugin.'
+    - '&e/ctoken add &7(&ejugador&7o &e*&7) &7(&evalor&7) &f- &7Añade el valor al balance de un jugador.'
+    - '&e/ctoken balance &7(&ejugador&7) &f- &7Obtiene el balance del jugador.'
+    - '&e/ctoken pay &7(&ejugadort&7) &7(&evalor&7) &f- &7Paga al jugador.'
+    - '&e/ctoken reset &7(&ejugador &7o &e*&7) &f- &7 Restablece el balance del jugador.'
+    - '&e/ctoken set &7(&ejugador&7) &7(&evalor&7) &f- &7Establece el balance del jugador.'
+    - '&e/ctoken take &7(&ejugador&7) &7(&evalor&7) &f- &7Toma del balance del jugador.'
+    - '&e/ctoken top &7(&evalor&7) &f- &7Obtiene la tabla de clasificación.'
+    - ''
+    - '&8&l━━━━━━━━━━━━━━━━━━━━━━[━━&e&lCTOKEN&8&l━━]━━━━━━━━━━━━━━━━━━━━━━'
+  reload: "&e&lTOKEN &8| &aHas recargado los archivos con éxito."
+  invalid-value: "&e&lTOKEN &8| &c¡{value} es un valor incorrecto!"
+  target-dont-exists: "&e&lTOKEN &8| &c¡El jugador no existe!"
+  add-sender: "&e&lTOKEN &8| &a¡Has añadido con éxito un &2{value} &atoken a tu &2{target} &abalance!"
+  add-target: "&e&lTOKEN &8| &2¡{value} &ase ha añadido a tu balance!"
+  add-everyone-sender: "&e&lTOKEN &8| &a¡Has añadido con éxito &2{value} &al balance de todos!"
+  not-enough-token: "&e&lTOKEN &8| &c¡No tienes suficientes tokens!"
+  pay-sender: "&e&lTOKEN &8| &a¡Has transferido con éxito un &2{value} &atoken a &2{target}&a!"
+  pay-target: "&e&lTOKEN &8| &2¡{player} &ate ha enviado &2{value} &atoken(s)!"
+  reset-everyone-sender: "&e&lTOKEN &8| &a¡Has conseguido restablecer el balance de todos!"
+  reset-sender: "&e&lTOKEN &8| &a¡Has restablecido con éxito el balance de &2{target}&a!"
+  reset-target: "&e&lTOKEN &8| &c¡Tu balance ha sido restablecido!"
+  set-sender: "&e&lTOKEN &8| &a¡Has establecido con éxito el balance de &2{target} &aen &2{value}&a!"
+  set-target: "&e&lTOKEN &8| &a¡Tu balance ha sido establecido en &2{value}&a!"
+  take-sender: "&e&lTOKEN &8| &a¡Has restado con éxito &2{value} &adel balance de &2{target}&a!"
+  take-target: "&e&lTOKEN &8| &2{value} &aha sido descontado de tu balance"
+  balance: "&e&lTOKEN &8| &2El balance de {target}&a es &2{balance}&a."

@@ -64,15 +64,17 @@ public class Webhook {
         String title = Optional.ofNullable(section.getString("title")).orElse("");
         String imageURL = Optional.ofNullable(section.getString("image")).orElse("");
 
-        description = replacePlaceholders(description, event);
-        authorName = replacePlaceholders(authorName, event);
-        authorURL = replacePlaceholders(authorURL, event);
-        authorIconURL = replacePlaceholders(authorIconURL, event);
-        footerText = replacePlaceholders(footerText, event);
-        footerIconURL = replacePlaceholders(footerIconURL, event);
-        thumbnailURL = replacePlaceholders(thumbnailURL, event);
-        title = replacePlaceholders(title, event);
-        imageURL = replacePlaceholders(imageURL, event);
+        if (event != null) {
+            description = replacePlaceholders(description, event);
+            authorName = replacePlaceholders(authorName, event);
+            authorURL = replacePlaceholders(authorURL, event);
+            authorIconURL = replacePlaceholders(authorIconURL, event);
+            footerText = replacePlaceholders(footerText, event);
+            footerIconURL = replacePlaceholders(footerIconURL, event);
+            thumbnailURL = replacePlaceholders(thumbnailURL, event);
+            title = replacePlaceholders(title, event);
+            imageURL = replacePlaceholders(imageURL, event);
+        }
 
         if (isEnabled && url != null && !url.isEmpty()) {
             Webhook webhook = new Webhook(url);
@@ -106,6 +108,7 @@ public class Webhook {
             webhook.execute();
         }
     }
+
 
     private static String replacePlaceholders(@NotNull String text, @NotNull PlaceholderProvider event) {
         return event.getPlaceholders()

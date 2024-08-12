@@ -1,9 +1,6 @@
 package net.coma112.ctoken.listener;
 
-import net.coma112.ctoken.api.events.BalanceAddEvent;
-import net.coma112.ctoken.api.events.BalanceResetEvent;
-import net.coma112.ctoken.api.events.BalanceSetEvent;
-import net.coma112.ctoken.api.events.BalanceTakeEvent;
+import net.coma112.ctoken.api.events.*;
 import net.coma112.ctoken.hooks.Webhook;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,5 +27,10 @@ public class WebhookListener implements Listener {
     @EventHandler
     public void onAdd(final BalanceAddEvent event) throws IOException, URISyntaxException {
         Webhook.sendWebhookFromString("webhook.balance-add-embed", event);
+    }
+
+    @EventHandler
+    public void onAddAll(final BalanceAddAllEvent event) throws IOException, URISyntaxException {
+        Webhook.sendWebhookFromString("webhook.balance-add-all-embed", event);
     }
 }

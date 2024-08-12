@@ -118,7 +118,7 @@ webhook:
   balance-take-embed:
     enabled: false
     url: "WEBHOOK URL HERE"
-    title: "BALANCE ADD"
+    title: "BALANCE TAKE"
     description: "**{player}** New Balance: **{takenAmount}** Old Balance: **{oldBalance}**"
     color: "YELLOW"
     author-name: ""
@@ -131,9 +131,9 @@ webhook:
   balance-reset-all-embed:
     enabled: false
     url: "WEBHOOK URL HERE"
-    title: "BALANCE ADD"
+    title: "BALANCE RESET"
     description: "Everyone's balance has been reset!"
-    color: "RED"
+    color: "YELLOW"
     author-name: ""
     author-url: ""
     author-icon: ""
@@ -145,8 +145,8 @@ webhook:
     enabled: false
     url: "WEBHOOK URL HERE"
     title: "BALANCE ADD"
-    description: "**{value}** has been added to everyone's balance"
-    color: "RED"
+    description: "**{addedAmount}** has been added to everyone's balance"
+    color: "YELLOW"
     author-name: ""
     author-url: ""
     author-icon: ""

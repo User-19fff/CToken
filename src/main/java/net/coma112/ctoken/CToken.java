@@ -61,6 +61,7 @@ public final class CToken extends JavaPlugin {
         config = new Config();
 
         saveResourceIfNotExists("locales/messages_en.yml");
+        saveResourceIfNotExists("locales/messages_es.yml");
 
         language = new Language("messages_" + LanguageType.valueOf(ConfigKeys.LANGUAGE.getString()));
     }

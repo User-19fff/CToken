@@ -6,19 +6,16 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class BalanceAddEvent extends Event implements PlaceholderProvider {
+public class BalanceAddAllEvent extends Event implements PlaceholderProvider {
     private static final HandlerList handlers = new HandlerList();
-    private final OfflinePlayer player;
-    private final int oldBalance;
     private final int addedAmount;
 
-    public BalanceAddEvent(@NotNull OfflinePlayer player, int oldBalance, int addedAmount) {
-        this.player = player;
-        this.oldBalance = oldBalance;
+    public BalanceAddAllEvent(int addedAmount) {
         this.addedAmount = addedAmount;
     }
 
@@ -35,9 +32,7 @@ public class BalanceAddEvent extends Event implements PlaceholderProvider {
     public Map<String, String> getPlaceholders() {
         Map<String, String> placeholders = new HashMap<>();
 
-        placeholders.put("{player}", player.getName());
         placeholders.put("{addedAmount}", String.valueOf(addedAmount));
-        placeholders.put("{oldBalance}", String.valueOf(oldBalance));
 
         return placeholders;
     }

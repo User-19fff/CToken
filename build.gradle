@@ -37,6 +37,7 @@ compileJava {
 }
 
 shadowJar {
+    archiveClassifier.set('all')
     relocate 'com.github.Anon8281.universalScheduler', 'net.coma112.CToken'
     minimize()
 }

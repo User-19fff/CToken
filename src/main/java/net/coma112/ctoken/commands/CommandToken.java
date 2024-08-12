@@ -1,6 +1,7 @@
 package net.coma112.ctoken.commands;
 
 import net.coma112.ctoken.CToken;
+import net.coma112.ctoken.api.events.BalanceAddAllEvent;
 import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.hooks.Webhook;
@@ -58,7 +59,7 @@ public class CommandToken {
             sender.sendMessage(MessageKeys.ADD_EVERYONE_SENDER
                     .getMessage()
                     .replace("{value}", FormatType.format(value)));
-            Webhook.sendWebhookFromString("webhook.balance-add-all-embed", null);
+            Bukkit.getServer().getPluginManager().callEvent(new BalanceAddAllEvent(value));
             return;
         }
 
