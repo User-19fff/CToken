@@ -1,9 +1,9 @@
 package net.coma112.ctoken.commands;
 
 import net.coma112.ctoken.CToken;
-import net.coma112.ctoken.api.events.BalanceAddAllEvent;
 import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
+import net.coma112.ctoken.events.BalanceAddAllEvent;
 import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.manager.TokenTop;
 import net.coma112.ctoken.utils.StartingUtils;
@@ -12,7 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Default;
@@ -37,6 +36,7 @@ public class CommandToken {
     }
 
     @Subcommand("help")
+    @CommandPermission("ctoken.help")
     public void help(@NotNull CommandSender sender) {
         MessageKeys.HELP
                 .getMessages()
@@ -54,7 +54,7 @@ public class CommandToken {
 
     @Subcommand("add")
     @CommandPermission("ctoken.add")
-    public void add(@NotNull CommandSender sender, @NotNull String input, int value) throws IOException, URISyntaxException {
+    public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
         if (value <= 0) {
             sender.sendMessage(MessageKeys.INVALID_VALUE
                     .getMessage()
@@ -218,8 +218,8 @@ public class CommandToken {
         sender.spigot().sendMessage(TokenTop.getTopDatabase(value));
     }
 
-    @Subcommand("inventory")
-    @CommandPermission("ctoken.inventory")
+    @Subcommand("worth")
+    @CommandPermission("ctoken.worth")
     public void inventory(@NotNull Player player) {
         Map<String, Integer> prices = new HashMap<>();
 

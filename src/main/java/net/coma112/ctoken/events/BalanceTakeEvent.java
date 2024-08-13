@@ -1,4 +1,4 @@
-package net.coma112.ctoken.api.events;
+package net.coma112.ctoken.events;
 
 import lombok.Getter;
 import net.coma112.ctoken.interfaces.PlaceholderProvider;
@@ -6,6 +6,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 

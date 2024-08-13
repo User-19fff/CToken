@@ -28,14 +28,14 @@ public final class StartingUtils {
 
         ConfigurationSection section = CToken.getInstance().getConfiguration().getSection("formatting.basic");
 
-        if (section != null) {
-            section.getKeys(false).forEach(key -> {
-                try {
-                    basicFormatOverrides.put(Long.parseLong(key), section.getString(key));
-                } catch (NumberFormatException exception) {
-                    TokenLogger.error("Invalid formatting key: " + key);
-                }
-            });
-        }
+        if (section == null) return;
+
+        section.getKeys(false).forEach(key -> {
+            try {
+                basicFormatOverrides.put(Long.parseLong(key), section.getString(key));
+            } catch (NumberFormatException exception) {
+                TokenLogger.error("Invalid formatting key: " + key);
+            }
+        });
     }
 }

@@ -26,8 +26,6 @@ public final class TokenLogger {
     }
 
     public static void colored(@NotNull String msg, @NotNull Object... objs) {
-        final Message message = new ParameterizedMessage(msg, objs);
-        Bukkit.getConsoleSender().sendMessage(MessageProcessor.process(message.getFormattedMessage()));
+        Bukkit.getConsoleSender().sendMessage(MessageProcessor.process(new ParameterizedMessage(msg, objs).getFormattedMessage()));
     }
-
 }

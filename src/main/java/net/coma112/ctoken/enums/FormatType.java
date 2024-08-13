@@ -22,17 +22,17 @@ public enum FormatType {
             case COMMAS, commas -> String.format("%,d", price);
             case BASIC, basic -> {
                 List<Map.Entry<Long, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
-
                 sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
-                for (Map.Entry<Long, String> entry : sortedEntries) {
-                    if (price >= entry.getKey()) {
-                        double formattedPrice = (double) price / entry.getKey();
-                        yield new DecimalFormat("#.#").format(formattedPrice) + entry.getValue();
-                    }
-                }
+                yield sortedEntries.stream()
+                        .filter(entry -> price >= entry.getKey())
+                        .findFirst()
+                        .map(entry -> {
+                            double formattedPrice = (double) price / entry.getKey();
 
-                yield String.valueOf(price);
+                            return new DecimalFormat("#.#").format(formattedPrice) + entry.getValue();
+                        })
+                        .orElse(String.valueOf(price));
             }
         };
     }

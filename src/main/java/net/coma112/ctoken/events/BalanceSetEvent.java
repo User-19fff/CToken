@@ -1,25 +1,27 @@
-package net.coma112.ctoken.api.events;
+package net.coma112.ctoken.events;
 
 import lombok.Getter;
 import net.coma112.ctoken.interfaces.PlaceholderProvider;
+import net.coma112.ctoken.interfaces.RegisterableListener;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class BalanceAddEvent extends Event implements PlaceholderProvider {
+public class BalanceSetEvent extends Event implements PlaceholderProvider {
     private static final HandlerList handlers = new HandlerList();
     private final OfflinePlayer player;
     private final int oldBalance;
-    private final int addedAmount;
+    private final int newBalance;
 
-    public BalanceAddEvent(@NotNull OfflinePlayer player, int oldBalance, int addedAmount) {
+    public BalanceSetEvent(@NotNull OfflinePlayer player, int oldBalance, int newBalance) {
         this.player = player;
         this.oldBalance = oldBalance;
-        this.addedAmount = addedAmount;
+        this.newBalance = newBalance;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class BalanceAddEvent extends Event implements PlaceholderProvider {
         Map<String, String> placeholders = new HashMap<>();
 
         placeholders.put("{player}", player.getName());
-        placeholders.put("{addedAmount}", String.valueOf(addedAmount));
+        placeholders.put("{newBalance}", String.valueOf(newBalance));
         placeholders.put("{oldBalance}", String.valueOf(oldBalance));
 
         return placeholders;
