@@ -5,38 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/CToken.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ItemKeys.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/MenuUpdater.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/menus/SettingsMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/MenuUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceAddAllEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceAddAllEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceAddEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceAddEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceSetEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/events/BalanceSetEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/hooks/Webhook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/hooks/Webhook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/interfaces/RegisterableListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listener/JoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/JoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listener/WebhookListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/WebhookListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/manager/TokenTop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/manager/TokenTop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/ConfigUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +286,7 @@
       <workItem from="1723627891169" duration="8465000" />
       <workItem from="1723638077075" duration="1897000" />
       <workItem from="1723658137814" duration="3890000" />
-      <workItem from="1723706365614" duration="2635000" />
+      <workItem from="1723706365614" duration="2669000" />
     </task>
     <servers />
   </component>

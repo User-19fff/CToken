@@ -33,7 +33,7 @@ public abstract class Menu implements InventoryHolder {
 
         setMenuItems();
         menuUtils.getOwner().openInventory(inventory);
-        new MenuUpdater(this).start(ConfigKeys.MENU_UPDATE_TICK.getDouble() * 20);
+        new MenuUpdater(this).start(ConfigKeys.MENU_UPDATE_TICK.getInt() * 20);
     }
 
     public void updateMenuItems() {
