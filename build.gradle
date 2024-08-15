@@ -2,9 +2,10 @@ plugins {
     id 'java'
     id 'io.freefair.lombok' version '8.6'
     id 'io.github.goooler.shadow' version '8.1.7'
+    id("io.papermc.paperweight.userdev") version "1.7.1"
 }
 
-group = 'net.coma112.CToken'
+group = 'net.coma112.ctoken'
 version = '1.0.0'
 
 repositories {
@@ -16,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT"
+    paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
     compileOnly 'org.projectlombok:lombok:1.18.32'
     compileOnly 'me.clip:placeholderapi:2.11.3'
     implementation 'com.github.Revxrsal.Lamp:common:3.2.1'
@@ -38,7 +39,15 @@ compileJava {
 }
 
 shadowJar {
-    relocate 'com.github.Anon8281.universalScheduler', 'net.coma112.CToken'
+    relocate 'com.github.Anon8281.universalScheduler', 'net.coma112.ctoken'
+
+    exclude("lamp_pt.properties")
+    exclude("lamp_it.properties")
+    exclude("lamp_fr.properties")
+    exclude("lamp-bukkit_pt.properties")
+    exclude("lamp-bukkit_it.properties")
+    exclude("lamp-bukkit_fr.properties")
+
     minimize()
 }
 

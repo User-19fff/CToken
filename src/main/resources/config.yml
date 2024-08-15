@@ -163,3 +163,38 @@ webhook:
 prices:
   DIRT: 50
   DIAMOND_BLOCK: 1000
+
+###################################################################
+# +-------------------------------------------------------------+ #
+# |                       SETTINGS GUI                          | #
+# +------------------------------------------------------------ + #
+###################################################################
+
+# Menu Configuration
+menu:
+  title: "&6&lSETTINGS"
+  size: 27
+  update-tick: 10
+  minimum-pay:
+    amount: 1
+    material: "PLAYER_HEAD"
+    name: "&eSet Minimum Pay Amount"
+    lore:
+      - ""
+      - "&7Click on this item"
+      - "&7To set the minimum"
+      - "&7Amount to pay to you!"
+    slot: 11
+    custom-model-data: 0
+    head: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTQyODUzODIxNzhmN2FiZDllZTgyOTEzNDBhYWZiZTNmNjE2Nzg1Y2VlMzlkYWI2NTRlMTM1Yzk1MjVmMWE4NyJ9fX0="
+  toggle-pay:
+    amount: 1
+    material: "PLAYER_HEAD"
+    name: "&eToggle Pay"
+    lore:
+      - ""
+      - "&7Click here"
+      - "&7To toggle payments!"
+    slot: 15
+    custom-model-data: 0
+    head: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYThiZGRjOWZkMDJiNjljMWY1ZjU0YTUyZmQyMTFmY2UzYzA1MjZiNTc4ZTk5OTg0NzQxMDA0OGFlMzk4YjBhMyJ9fX0="

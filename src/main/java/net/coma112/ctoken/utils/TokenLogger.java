@@ -3,7 +3,6 @@ package net.coma112.ctoken.utils;
 import net.coma112.ctoken.processor.MessageProcessor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.ParameterizedMessage;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;

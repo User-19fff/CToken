@@ -1,15 +1,14 @@
-package net.coma112.ctoken.listener;
+package net.coma112.ctoken.listeners;
 
 import net.coma112.ctoken.events.*;
 import net.coma112.ctoken.hooks.Webhook;
-import net.coma112.ctoken.interfaces.RegisterableListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class WebhookListener implements Listener, RegisterableListener {
+public class WebhookListener implements Listener {
     @EventHandler
     public void onTake(final BalanceTakeEvent event) throws IOException, URISyntaxException {
         Webhook.sendWebhookFromString("webhook.balance-take-embed", event);

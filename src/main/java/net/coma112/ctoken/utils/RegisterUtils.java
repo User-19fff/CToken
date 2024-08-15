@@ -2,22 +2,19 @@ package net.coma112.ctoken.utils;
 
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.commands.CommandToken;
-import net.coma112.ctoken.interfaces.RegisterableListener;
-import net.coma112.ctoken.listener.JoinListener;
-import net.coma112.ctoken.listener.WebhookListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.reflections.Reflections;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
-import java.util.Set;
+import revxrsal.commands.bukkit.exception.SenderNotPlayerException;
+import revxrsal.commands.exception.InvalidNumberException;
+import revxrsal.commands.exception.MissingArgumentException;
+import revxrsal.commands.exception.NoPermissionException;
 
 public final class RegisterUtils {
     public static void registerListeners() {
         new Reflections("net.coma112.ctoken.listeners")
-                .getSubTypesOf(RegisterableListener.class)
+                .getSubTypesOf(Listener.class)
                 .forEach(listenerClass -> {
             try {
                 Bukkit.getServer().getPluginManager().registerEvents(listenerClass.getDeclaredConstructor().newInstance(), CToken.getInstance());
@@ -28,8 +25,14 @@ public final class RegisterUtils {
     }
 
     public static void registerCommands() {
-        BukkitCommandHandler
-                .create(CToken.getInstance())
-                .register(new CommandToken());
+        BukkitCommandHandler handler = BukkitCommandHandler.create(CToken.getInstance());
+
+        handler.register(new CommandToken());
+
+        handler.registerExceptionHandler(SenderNotPlayerException.class, TokenUtils::handleSenderNotPlayerException);
+        handler.registerExceptionHandler(InvalidNumberException.class, TokenUtils::handleInvalidNumberException);
+        handler.registerExceptionHandler(NoPermissionException.class, TokenUtils::handleNoPermissionException);
+        handler.registerExceptionHandler(MissingArgumentException.class, TokenUtils::handleMissingArgumentException);
+        handler.registerBrigadier();
     }
 }

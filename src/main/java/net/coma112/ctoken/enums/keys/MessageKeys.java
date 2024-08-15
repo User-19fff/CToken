@@ -29,6 +29,10 @@ public enum MessageKeys {
     SOLD_ALL("message.sold-all"),
     WORTH_HEADER("message.worth.header"),
     NO_VALUE("message.no-value"),
+    PLAYER_REQUIRED("message.player-required"),
+    NO_PERMISSION("message.no-permission"),
+    MISSING_ARGUMENT("message.missing-argument"),
+    INVALID_NUMBER("message.invalid-number"),
     WORTH_ITEM("message.worth.item"),
     WORTH_TOTAL("message.worth.total"),
     HELP("message.help");

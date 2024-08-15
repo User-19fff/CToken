@@ -11,9 +11,12 @@ public enum ConfigKeys {
     FORMATTING_TYPE("formatting.type"),
     STARTING_BALANCE("starting-balance"),
 
+    MENU_UPDATE_TICK("menu.update-tick"),
+    MENU_TITLE("menu.title"),
+    MENU_SIZE("menu.size"),
+
     BADGES_ENABLED("features.badges.enabled"),
     BADGES_MULTIPLIER("features.badges.multiplier");
-
 
     private final String path;
 

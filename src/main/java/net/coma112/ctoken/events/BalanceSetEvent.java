@@ -2,7 +2,6 @@ package net.coma112.ctoken.events;
 
 import lombok.Getter;
 import net.coma112.ctoken.interfaces.PlaceholderProvider;
-import net.coma112.ctoken.interfaces.RegisterableListener;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

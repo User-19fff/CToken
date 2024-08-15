@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Getter
@@ -40,7 +41,7 @@ public class MySQL extends AbstractDatabase {
         int poolSize = section.getInt("poolsize");
         int maxLifetime = section.getInt("lifetime");
 
-        hikariConfig.setPoolName("TemplatePool");
+        hikariConfig.setPoolName("TokenPool");
         hikariConfig.setMaximumPoolSize(poolSize);
         hikariConfig.setMaxLifetime(maxLifetime * 1000L);
         hikariConfig.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
@@ -242,7 +243,7 @@ public class MySQL extends AbstractDatabase {
     @Override
     public void setBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
-        updateBalance(player.getName(), newBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), newBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceSetEvent(player, oldBalance, newBalance));
     }
 
@@ -250,7 +251,7 @@ public class MySQL extends AbstractDatabase {
     public void addToBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance + newBalance;
-        updateBalance(player.getName(), updatedBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceAddEvent(player, oldBalance, newBalance));
     }
 
@@ -278,7 +279,7 @@ public class MySQL extends AbstractDatabase {
     @Override
     public void resetBalance(@NotNull OfflinePlayer player) {
         int oldBalance = getBalance(player);
-        updateBalance(player.getName(), 0);
+        updateBalance(Objects.requireNonNull(player.getName()), 0);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceResetEvent(player, oldBalance));
     }
 
@@ -298,7 +299,7 @@ public class MySQL extends AbstractDatabase {
     public void takeFromBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance - newBalance;
-        updateBalance(player.getName(), updatedBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceTakeEvent(player, oldBalance, newBalance));
     }
 
@@ -307,7 +308,7 @@ public class MySQL extends AbstractDatabase {
         return (int) (tokenBalance * ConfigKeys.BADGES_MULTIPLIER.getDouble());
     }
 
-    private void updateBalance(String playerName, int newBalance) {
+    private void updateBalance(@NotNull String playerName, int newBalance) {
         String updateQuery = "UPDATE token SET BALANCE = ?, XP = ? WHERE PLAYER = ?";
 
         try {

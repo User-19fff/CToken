@@ -41,9 +41,9 @@ public final class CToken extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         initializeComponents();
-        registerListenersAndCommands();
         initializeDatabaseManager();
         loadBasicFormatOverrides();
+        registerListenersAndCommands();
 
         new PlaceholderAPI().register();
     }
@@ -79,7 +79,6 @@ public final class CToken extends JavaPlugin {
                     database = new SQLite();
                     SQLite sqlite = (SQLite) database;
                     sqlite.createTable();
-
                 }
             }
         } catch (SQLException | ClassNotFoundException exception) {

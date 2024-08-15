@@ -17,6 +17,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 
 @Getter
 public class SQLite extends AbstractDatabase {
@@ -24,9 +26,7 @@ public class SQLite extends AbstractDatabase {
 
     public SQLite() throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
-        File dataFolder = new File(CToken.getInstance().getDataFolder(), "token.db");
-        String url = "jdbc:sqlite:" + dataFolder;
-        connection = DriverManager.getConnection(url);
+        connection = DriverManager.getConnection("jdbc:sqlite:" + new File(CToken.getInstance().getDataFolder(), "token.db"));
     }
 
     @Override
@@ -207,7 +207,7 @@ public class SQLite extends AbstractDatabase {
     @Override
     public void setBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
-        updateBalance(player.getName(), newBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), newBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceSetEvent(player, oldBalance, newBalance));
     }
 
@@ -215,7 +215,7 @@ public class SQLite extends AbstractDatabase {
     public void addToBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance + newBalance;
-        updateBalance(player.getName(), updatedBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceAddEvent(player, oldBalance, newBalance));
     }
 
@@ -243,7 +243,7 @@ public class SQLite extends AbstractDatabase {
     @Override
     public void resetBalance(@NotNull OfflinePlayer player) {
         int oldBalance = getBalance(player);
-        updateBalance(player.getName(), 0);
+        updateBalance(Objects.requireNonNull(player.getName()), 0);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceResetEvent(player, oldBalance));
     }
 
@@ -263,7 +263,7 @@ public class SQLite extends AbstractDatabase {
     public void takeFromBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance - newBalance;
-        updateBalance(player.getName(), updatedBalance);
+        updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceTakeEvent(player, oldBalance, newBalance));
     }
 
@@ -272,7 +272,7 @@ public class SQLite extends AbstractDatabase {
         return (int) (tokenBalance * ConfigKeys.BADGES_MULTIPLIER.getDouble());
     }
 
-    private void updateBalance(String playerName, int newBalance) {
+    private void updateBalance(@NotNull String playerName, int newBalance) {
         String updateQuery = "UPDATE token SET BALANCE = ?, XP = ? WHERE PLAYER = ?";
 
         try {

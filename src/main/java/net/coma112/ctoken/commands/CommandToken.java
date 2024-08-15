@@ -6,25 +6,20 @@ import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.events.BalanceAddAllEvent;
 import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.manager.TokenTop;
+import net.coma112.ctoken.menu.menus.SettingsMenu;
+import net.coma112.ctoken.utils.MenuUtils;
 import net.coma112.ctoken.utils.StartingUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import revxrsal.commands.annotation.Command;
-import revxrsal.commands.annotation.Default;
-import revxrsal.commands.annotation.DefaultFor;
-import revxrsal.commands.annotation.Subcommand;
+import revxrsal.commands.annotation.*;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Command({"ctoken", "token"})
@@ -54,6 +49,7 @@ public class CommandToken {
 
     @Subcommand("add")
     @CommandPermission("ctoken.add")
+    @Usage("/ctoken add (input) (value)")
     public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
         if (value <= 0) {
             sender.sendMessage(MessageKeys.INVALID_VALUE
@@ -101,6 +97,7 @@ public class CommandToken {
 
     @Subcommand("pay")
     @CommandPermission("ctoken.pay")
+    @Usage("/ctoken pay (target) (value)")
     public void pay(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
             player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
@@ -133,6 +130,7 @@ public class CommandToken {
 
     @Subcommand("reset")
     @CommandPermission("ctoken.reset")
+    @Usage("/ctoken reset (target or '*')")
     public void reset(@NotNull CommandSender sender, @NotNull String input) throws IOException, URISyntaxException {
         if (input.equals("*")) {
             CToken.getDatabase().resetEveryone();
@@ -157,6 +155,7 @@ public class CommandToken {
 
     @Subcommand("set")
     @CommandPermission("ctoken.set")
+    @Usage("/ctoken set (target) (value)")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
@@ -182,6 +181,7 @@ public class CommandToken {
 
     @Subcommand("take")
     @CommandPermission("ctoken.take")
+    @Usage("/ctoken add (input) (value)")
     public void take(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
         if (!target.hasPlayedBefore()) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
@@ -218,6 +218,12 @@ public class CommandToken {
         sender.spigot().sendMessage(TokenTop.getTopDatabase(value));
     }
 
+    @Subcommand("settings")
+    @CommandPermission("ctoken.settings")
+    public void settings(@NotNull Player player) {
+        new SettingsMenu(MenuUtils.getMenuUtils(player)).open();
+    }
+
     @Subcommand("worth")
     @CommandPermission("ctoken.worth")
     public void inventory(@NotNull Player player) {
@@ -238,19 +244,15 @@ public class CommandToken {
         Arrays.stream(player.getInventory().getContents())
                 .filter(Objects::nonNull)
                 .forEach(item -> {
-                    Material material = item.getType();
-                    String materialName = material.name();
+                    if (!prices.containsKey(item.getType().name())) return;
 
-                    if (!prices.containsKey(materialName)) return;
-
-                    int itemAmount = item.getAmount();
-                    int itemTotalValue = prices.get(materialName) * itemAmount;
+                    int itemTotalValue = prices.get(item.getType().name()) * item.getAmount();
 
                     totalValue.addAndGet(itemTotalValue);
 
                     String itemMessage = MessageKeys.WORTH_ITEM.getMessage()
-                            .replace("{item}", materialName.replace("_", " "))
-                            .replace("{amount}", String.valueOf(itemAmount))
+                            .replace("{item}", item.getType().name().replace("_", " "))
+                            .replace("{amount}", String.valueOf(item.getAmount()))
                             .replace("{value}", FormatType.format(itemTotalValue));
 
                     inventoryList
@@ -285,15 +287,10 @@ public class CommandToken {
             Arrays.stream(player.getInventory().getContents())
                     .filter(Objects::nonNull)
                     .forEach(item -> {
-                Material material = item.getType();
-                String materialName = material.name();
+                if (!prices.containsKey(item.getType().name())) return;
 
-                if (!prices.containsKey(materialName)) return;
-
-                int itemAmount = item.getAmount();
-
-                totalValue.addAndGet(prices.get(materialName) * itemAmount);
-                itemsSold.addAndGet(itemAmount);
+                totalValue.addAndGet(prices.get(item.getType().name()) * item.getAmount());
+                itemsSold.addAndGet(item.getAmount());
                 player.getInventory().remove(item);
             });
 
@@ -303,15 +300,10 @@ public class CommandToken {
             Arrays.stream(player.getInventory().getContents())
                     .filter(Objects::nonNull)
                     .forEach(item -> {
-                Material material = item.getType();
-                String materialName = material.name();
+                if (!item.getType().name().equalsIgnoreCase(itemName) || !prices.containsKey(item.getType().name())) return;
 
-                if (!materialName.equalsIgnoreCase(itemName) || !prices.containsKey(materialName)) return;
-
-                int itemAmount = item.getAmount();
-
-                totalValue.addAndGet(prices.get(materialName) * itemAmount);
-                itemsSold.addAndGet(itemAmount);
+                totalValue.addAndGet(prices.get(item.getType().name()) * item.getAmount());
+                itemsSold.addAndGet(item.getAmount());
                 player.getInventory().remove(item);
             });
 

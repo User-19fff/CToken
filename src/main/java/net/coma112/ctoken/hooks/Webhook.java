@@ -109,7 +109,6 @@ public class Webhook {
         }
     }
 
-
     private static String replacePlaceholders(@NotNull String text, @NotNull PlaceholderProvider event) {
         return event.getPlaceholders()
                 .entrySet()
@@ -275,9 +274,9 @@ public class Webhook {
             json.put("embeds", embedObjects.toArray());
         }
 
-        URI uri = new URI(this.url);
-        URL url = uri.toURL();
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) new URI(this.url)
+                .toURL()
+                .openConnection();
 
         connection.addRequestProperty("Content-Type", "application/json");
         connection.addRequestProperty("User-Agent", "Java-Webhook");
@@ -319,7 +318,8 @@ public class Webhook {
         }
 
         private String quote(@NotNull String string) {
-            return "\"" + string.replace("\"", "\\\"") + "\"";
+            return "\"" + string
+                    .replace("\"", "\\\"") + "\"";
         }
 
         private String arrayToString(@NotNull Object[] array) {

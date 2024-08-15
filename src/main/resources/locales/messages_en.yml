@@ -34,6 +34,10 @@ message:
   sold-one: "&e&lTOKEN &8| &aYou have successfully sold &2{amount}&ax &2{material} &afor &2{value}&a!"
   sold-all: "&e&lTOKEN &8| &aYou have successfully every item from your inventory for &2{value}&a!"
   no-value: "&e&lTOKEN &8| &cYou have no valuable items in your inventory."
+  player-required: "&e&lTOKEN &8| &cThe executor must be a player!"
+  no-permission: "&e&lTOKEN &8| &cYou don't have permission for this!"
+  invalid-number: "&e&lTOKEN &8| &cInvalid Number!"
+  missing-argument: "&e&lTOKEN &8| &cCorrect Usage: {usage}"
   worth:
     header: "&eInventory value:"
     item: "&7- &e{item} &7(&e{amount}&fx&7) - &e{value}"

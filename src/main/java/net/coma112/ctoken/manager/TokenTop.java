@@ -16,13 +16,11 @@ public record TokenTop(@NotNull String playerName, int balance) {
         TextComponent message = new TextComponent(MessageProcessor.process("\n&eTop " + value + " Balances:&f\n\n"));
 
         IntStream.range(0, topBalance.size()).forEach(index -> {
-            TokenTop balanceManager = topBalance.get(index);
-
             message.addExtra(MessageProcessor.process(
                     String.format("&f%d. &e%s &f- &7(&e%s&7)",
                             index + 1,
-                            balanceManager.playerName(),
-                            FormatType.format(balanceManager.balance()))
+                            topBalance.get(index).playerName(),
+                            FormatType.format(topBalance.get(index).balance()))
             ));
 
             if (index < topBalance.size() - 1) message.addExtra("\n");
