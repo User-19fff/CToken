@@ -3,12 +3,12 @@ package net.coma112.ctoken.item;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.processor.MessageProcessor;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -37,8 +37,6 @@ public interface ItemFactory {
     }
 
     ItemFactory setType(@NotNull Material material);
-
-    ItemBuilder setHead(@NotNull String url);
 
     ItemFactory setCount(int newCount);
 
@@ -76,7 +74,7 @@ public interface ItemFactory {
 
     boolean isFinished();
 
-    static void createItemFromString(@NotNull String path, @NotNull Inventory inventory) {
+    static ItemStack createItemFromString(@NotNull String path) {
         ConfigurationSection section = CToken.getInstance().getConfiguration().getSection(path);
 
         Material material = Material.valueOf(Objects.requireNonNull(section).getString("material"));
@@ -84,16 +82,14 @@ public interface ItemFactory {
         String name = section.getString("name");
         String[] loreArray = section.getStringList("lore").toArray(new String[0]);
         int customModelData = section.getInt("custom-model-data", 0);
-        String headURL = section.getString("head", "");
         int slot = section.getInt("slot", 0);
 
         IntStream.range(0, loreArray.length).forEach(i -> loreArray[i] = MessageProcessor.process(loreArray[i]));
 
-        inventory.setItem(slot, ItemFactory.create(material, amount)
+        return ItemFactory.create(material, amount)
                 .setName(Objects.requireNonNull(name))
                 .addLore(loreArray)
                 .setCustomModelData(customModelData)
-                .setHead(headURL)
-                .finish());
+                .finish();
     }
 }

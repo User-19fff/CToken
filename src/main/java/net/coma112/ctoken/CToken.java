@@ -2,6 +2,7 @@ package net.coma112.ctoken;
 
 import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
+import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import lombok.Getter;
 import net.coma112.ctoken.config.Config;
 import net.coma112.ctoken.database.AbstractDatabase;

@@ -38,6 +38,11 @@ message:
   no-permission: "&e&lTOKEN &8| &cYou don't have permission for this!"
   invalid-number: "&e&lTOKEN &8| &cInvalid Number!"
   missing-argument: "&e&lTOKEN &8| &cCorrect Usage: {usage}"
+  disable-pay: "&e&lTOKEN &8| &cPayment receiving is disabled!"
+  enable-pay: "&e&lTOKEN &8| &aPayment receiving is enabled!"
+  enter-number: "&e&lTOKEN &8| &aEnter a correct number to change the value!"
+  not-enough-minimum-payment: "&e&lTOKEN &8| &4{target}&c's minimum payment is &4{value}&c!"
+  payment-is-disabled-try: "&e&lTOKEN &8| &4{target} &ccannot receive money!"
   worth:
     header: "&eInventory value:"
     item: "&7- &e{item} &7(&e{amount}&fx&7) - &e{value}"

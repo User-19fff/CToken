@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/PaginatedMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ItemKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ItemKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/item/ItemFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/MenuUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/MenuUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/menus/SettingsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/menu/menus/SettingsMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +83,8 @@
         <option value="Record" />
         <option value="AnnotationType" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -286,7 +303,10 @@
       <workItem from="1723627891169" duration="8465000" />
       <workItem from="1723638077075" duration="1897000" />
       <workItem from="1723658137814" duration="3890000" />
-      <workItem from="1723706365614" duration="2669000" />
+      <workItem from="1723706365614" duration="2675000" />
+      <workItem from="1723755939003" duration="418000" />
+      <workItem from="1723805828297" duration="8844000" />
+      <workItem from="1723836629799" duration="6478000" />
     </task>
     <servers />
   </component>

@@ -2,6 +2,7 @@ package net.coma112.ctoken.database;
 
 import net.coma112.ctoken.manager.TokenTop;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -16,6 +17,16 @@ public abstract class AbstractDatabase {
     public abstract void createTable();
 
     public abstract void createPlayer(@NotNull OfflinePlayer player);
+
+    public abstract void enablePay(@NotNull OfflinePlayer player);
+
+    public abstract void disablePay(@NotNull OfflinePlayer player);
+
+    public abstract boolean getPayStatus(@NotNull OfflinePlayer player);
+
+    public abstract void changeMinimumPay(@NotNull OfflinePlayer player, int amount);
+
+    public abstract int getMinimumPay(@NotNull OfflinePlayer player);
 
     public abstract boolean exists(@NotNull OfflinePlayer player);
 
@@ -44,4 +55,6 @@ public abstract class AbstractDatabase {
     public abstract void takeFromBalance(@NotNull OfflinePlayer player, int newBalance);
 
     public abstract int calculateXPFromTokens(int tokenBalance);
+
+    public abstract void changePayStatus(@NotNull OfflinePlayer player);
 }

@@ -1,23 +1,32 @@
 package net.coma112.ctoken.commands;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.events.BalanceAddAllEvent;
 import net.coma112.ctoken.hooks.Webhook;
+import net.coma112.ctoken.item.ItemBuilder;
 import net.coma112.ctoken.manager.TokenTop;
 import net.coma112.ctoken.menu.menus.SettingsMenu;
 import net.coma112.ctoken.utils.MenuUtils;
 import net.coma112.ctoken.utils.StartingUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.*;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -113,6 +122,21 @@ public class CommandToken {
 
         if (CToken.getDatabase().getBalance(target) < value) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
+            return;
+        }
+
+        if (!CToken.getDatabase().getPayStatus(target)) {
+            player.sendMessage(MessageKeys.PAYMENT_DISABLED
+                    .getMessage()
+                    .replace("{target}", Objects.requireNonNull(target.getName())));
+            return;
+        }
+
+        if (value < CToken.getDatabase().getMinimumPay(target)) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_PAYMENT
+                    .getMessage()
+                    .replace("{value}", FormatType.format(CToken.getDatabase().getMinimumPay(target)))
+                    .replace("{target}", Objects.requireNonNull(target.getName())));
             return;
         }
 
@@ -238,33 +262,32 @@ public class CommandToken {
         String headerMessage = MessageKeys.WORTH_HEADER.getMessage();
 
         inventoryList
+                .append("\n \n")
                 .append(headerMessage)
-                .append("\n");
+                .append("\n \n");
 
         Arrays.stream(player.getInventory().getContents())
                 .filter(Objects::nonNull)
+                .filter(item -> prices.containsKey(item.getType().name()))
                 .forEach(item -> {
-                    if (!prices.containsKey(item.getType().name())) return;
-
                     int itemTotalValue = prices.get(item.getType().name()) * item.getAmount();
 
                     totalValue.addAndGet(itemTotalValue);
 
-                    String itemMessage = MessageKeys.WORTH_ITEM.getMessage()
-                            .replace("{item}", item.getType().name().replace("_", " "))
-                            .replace("{amount}", String.valueOf(item.getAmount()))
-                            .replace("{value}", FormatType.format(itemTotalValue));
-
                     inventoryList
-                            .append(itemMessage)
-                            .append("\n");
+                            .append(MessageKeys.WORTH_ITEM.getMessage()
+                                    .replace("{item}", item.getType().name().replace("_", " "))
+                                    .replace("{amount}", String.valueOf(item.getAmount()))
+                                    .replace("{value}", FormatType.format(itemTotalValue)))
+                            .append("\n \n");
                 });
 
         if (totalValue.get() > 0) {
             inventoryList
-                    .append("\n")
                     .append(MessageKeys.WORTH_TOTAL.getMessage()
-                    .replace("{total}", FormatType.format(totalValue.get())));
+                            .replace("{total}", FormatType.format(totalValue.get())))
+                    .append("\n \n");
+
 
             player.sendMessage(inventoryList.toString());
 
@@ -286,8 +309,8 @@ public class CommandToken {
         if (itemName.equals("*")) {
             Arrays.stream(player.getInventory().getContents())
                     .filter(Objects::nonNull)
+                    .filter(item -> prices.containsKey(item.getType().name()))
                     .forEach(item -> {
-                if (!prices.containsKey(item.getType().name())) return;
 
                 totalValue.addAndGet(prices.get(item.getType().name()) * item.getAmount());
                 itemsSold.addAndGet(item.getAmount());
@@ -299,8 +322,8 @@ public class CommandToken {
         } else {
             Arrays.stream(player.getInventory().getContents())
                     .filter(Objects::nonNull)
+                    .filter(item -> item.getType().name().equalsIgnoreCase(itemName) || prices.containsKey(item.getType().name()))
                     .forEach(item -> {
-                if (!item.getType().name().equalsIgnoreCase(itemName) || !prices.containsKey(item.getType().name())) return;
 
                 totalValue.addAndGet(prices.get(item.getType().name()) * item.getAmount());
                 itemsSold.addAndGet(item.getAmount());

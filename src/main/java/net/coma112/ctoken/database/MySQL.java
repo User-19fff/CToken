@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import net.coma112.ctoken.enums.keys.ConfigKeys;
+import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.events.BalanceAddEvent;
 import net.coma112.ctoken.events.BalanceResetEvent;
 import net.coma112.ctoken.events.BalanceSetEvent;
@@ -13,6 +14,7 @@ import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -82,7 +84,7 @@ public class MySQL extends AbstractDatabase {
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS token (PLAYER VARCHAR(255) NOT NULL, BALANCE INT, XP INT DEFAULT 0, PRIMARY KEY (PLAYER))";
+        String query = "CREATE TABLE IF NOT EXISTS token (PLAYER VARCHAR(255) NOT NULL, BALANCE INT, XP INT DEFAULT 0, TOGGLE_PAY BIT DEFAULT 1, MINIMUM_PAY INT DEFAULT " + ConfigKeys.DEFAULT_MINIMUM_PAY.getInt() + ", PRIMARY KEY (PLAYER))";
 
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.execute();
@@ -125,6 +127,83 @@ public class MySQL extends AbstractDatabase {
         }
 
         return false;
+    }
+
+    @Override
+    public void enablePay(@NotNull OfflinePlayer player) {
+        String query = "UPDATE token SET TOGGLE_PAY = 1 WHERE PLAYER = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setString(1, player.getName());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+    }
+
+    @Override
+    public void disablePay(@NotNull OfflinePlayer player) {
+        String query = "UPDATE token SET TOGGLE_PAY = 0 WHERE PLAYER = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setString(1, player.getName());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+    }
+
+    @Override
+    public boolean getPayStatus(@NotNull OfflinePlayer player) {
+        String query = "SELECT TOGGLE_PAY FROM token WHERE PLAYER = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setString(1, player.getName());
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) return resultSet.getInt("TOGGLE_PAY") == 1;
+                }
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public void changeMinimumPay(@NotNull OfflinePlayer player, int amount) {
+        String query = "UPDATE token SET MINIMUM_PAY = ? WHERE PLAYER = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setInt(1, amount);
+                preparedStatement.setString(2, player.getName());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int getMinimumPay(@NotNull OfflinePlayer player) {
+        String query = "SELECT MINIMUM_PAY FROM token WHERE PLAYER = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setString(1, player.getName());
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) return resultSet.getInt("MINIMUM_PAY");
+                }
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+        return 0;
     }
 
     @Override
@@ -306,6 +385,19 @@ public class MySQL extends AbstractDatabase {
     @Override
     public int calculateXPFromTokens(int tokenBalance) {
         return (int) (tokenBalance * ConfigKeys.BADGES_MULTIPLIER.getDouble());
+    }
+
+    @Override
+    public void changePayStatus(@NotNull OfflinePlayer player) {
+        if (player.getPlayer() == null) return;
+
+        if (getPayStatus(player)) {
+            disablePay(player);
+            player.getPlayer().sendMessage(MessageKeys.DISABLE_PAY.getMessage());
+        } else {
+            enablePay(player);
+            player.getPlayer().sendMessage(MessageKeys.ENABLE_PAY.getMessage());
+        }
     }
 
     private void updateBalance(@NotNull String playerName, int newBalance) {

@@ -33,6 +33,11 @@ public enum MessageKeys {
     NO_PERMISSION("message.no-permission"),
     MISSING_ARGUMENT("message.missing-argument"),
     INVALID_NUMBER("message.invalid-number"),
+    PAYMENT_DISABLED("message.payment-is-disabled-try"),
+    ENTER_NUMBER("message.enter-number"),
+    NOT_ENOUGH_PAYMENT("message.not-enough-minimum-payment"),
+    DISABLE_PAY("message.disable-pay"),
+    ENABLE_PAY("message.enable-pay"),
     WORTH_ITEM("message.worth.item"),
     WORTH_TOTAL("message.worth.total"),
     HELP("message.help");

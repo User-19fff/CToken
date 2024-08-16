@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class MenuUpdater {
     private final Menu menu;
-    private boolean running = true;
     private MyScheduledTask task;
+    private boolean running = true;
 
     public MenuUpdater(@NotNull Menu menu) {
         this.menu = menu;
@@ -32,7 +32,6 @@ public class MenuUpdater {
 
         if (task != null) {
             task.cancel();
-
             task = null;
         }
     }

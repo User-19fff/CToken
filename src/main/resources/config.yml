@@ -6,6 +6,9 @@
 
 language: "en" # Supported languages -> hu, de, en, tr, es
 starting-balance: 500
+default-minimum-pay: 1
+enabled: "&aENABLED"
+disabled: "&cDISABLED"
 
 database:
   type: "sqlite" # Supported database types -> sqlite, mysql
@@ -174,27 +177,34 @@ prices:
 menu:
   title: "&6&lSETTINGS"
   size: 27
-  update-tick: 10
+  update-tick: 2
+  filler-item: true
   minimum-pay:
+    material: "DIAMOND"
     amount: 1
-    material: "PLAYER_HEAD"
     name: "&eSet Minimum Pay Amount"
     lore:
       - ""
       - "&7Click on this item"
       - "&7To set the minimum"
       - "&7Amount to pay to you!"
+      - ""
+      - "&eCurrenct Value&f: &e{value}"
     slot: 11
     custom-model-data: 0
-    head: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTQyODUzODIxNzhmN2FiZDllZTgyOTEzNDBhYWZiZTNmNjE2Nzg1Y2VlMzlkYWI2NTRlMTM1Yzk1MjVmMWE4NyJ9fX0="
   toggle-pay:
+    material: "REDSTONE"
     amount: 1
-    material: "PLAYER_HEAD"
     name: "&eToggle Pay"
     lore:
       - ""
       - "&7Click here"
       - "&7To toggle payments!"
+      - ""
+      - "&eCurrent Status&f: {status}"
     slot: 15
     custom-model-data: 0
-    head: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYThiZGRjOWZkMDJiNjljMWY1ZjU0YTUyZmQyMTFmY2UzYzA1MjZiNTc4ZTk5OTg0NzQxMDA0OGFlMzk4YjBhMyJ9fX0="
+
+filler-item:
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "
