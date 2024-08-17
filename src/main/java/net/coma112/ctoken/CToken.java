@@ -13,7 +13,9 @@ import net.coma112.ctoken.enums.LanguageType;
 import net.coma112.ctoken.enums.keys.ConfigKeys;
 import net.coma112.ctoken.hooks.PlaceholderAPI;
 import net.coma112.ctoken.language.Language;
+import net.coma112.ctoken.utils.StartingUtils;
 import net.coma112.ctoken.utils.TokenLogger;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -36,10 +38,13 @@ public final class CToken extends JavaPlugin {
     public void onLoad() {
         instance = this;
         scheduler = UniversalScheduler.getScheduler(this);
+
+        checkVersion();
     }
 
     @Override
     public void onEnable() {
+        checkVM();
         saveDefaultConfig();
         initializeComponents();
         initializeDatabaseManager();
@@ -47,6 +52,7 @@ public final class CToken extends JavaPlugin {
         registerListenersAndCommands();
 
         new PlaceholderAPI().register();
+        new Metrics(this, 23062);
     }
 
     @Override
