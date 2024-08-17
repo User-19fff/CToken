@@ -48,10 +48,12 @@ public final class TokenUtils {
         String message;
 
         if (itemName.equals("*")) {
-            message = MessageKeys.SOLD_ALL.getMessage()
+            message = MessageKeys.SOLD_ALL
+                    .getMessage()
                     .replace("{value}", FormatType.format(totalValue));
         } else {
-            message = MessageKeys.SOLD_ONE.getMessage()
+            message = MessageKeys.SOLD_ONE
+                    .getMessage()
                     .replace("{amount}", String.valueOf(itemsSold))
                     .replace("{material}", itemName)
                     .replace("{value}", FormatType.format(totalValue));

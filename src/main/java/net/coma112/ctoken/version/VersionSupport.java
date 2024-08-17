@@ -1,6 +1,7 @@
 package net.coma112.ctoken.version;
 
 import lombok.Getter;
+import net.coma112.ctoken.interfaces.ServerVersionSupport;
 import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;

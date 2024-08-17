@@ -3,16 +3,13 @@ package net.coma112.ctoken.utils;
 import lombok.Getter;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.version.MinecraftVersion;
-import net.coma112.ctoken.version.ServerVersionSupport;
-import net.coma112.ctoken.version.VersionSupport;
+import net.coma112.ctoken.interfaces.ServerVersionSupport;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,13 +84,11 @@ public final class StartingUtils {
                     return;
                 }
 
-                VersionSupport support = new VersionSupport(CToken.getInstance() ,version);
+                net.coma112.ctoken.version.VersionSupport support = new net.coma112.ctoken.version.VersionSupport(CToken.getInstance() ,version);
                 ServerVersionSupport nms = support.getVersionSupport();
                 isSupported = nms != null;
 
-            } else {
-                isSupported = false;
-            }
+            } else isSupported = false;
         } catch (Exception exception) {
             isSupported = false;
         }

@@ -5,26 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/MinecraftVersion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/ServerVersionSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R1/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R2/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R1/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R2/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R3/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R4/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R1/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R2/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R3/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R6/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_21_R1/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CToken.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/ServerVersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/interfaces/ServerVersionSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R1/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R1/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R2/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_18_R2/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R1/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R1/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R2/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R2/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R3/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R3/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R4/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_19_R4/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R1/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R1/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R2/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R2/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R3/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R3/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R6/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_20_R6/ServerVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_21_R1/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/nms/v1_21_R1/ServerVersion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +310,7 @@
       <workItem from="1723755939003" duration="418000" />
       <workItem from="1723805828297" duration="8844000" />
       <workItem from="1723836629799" duration="6533000" />
-      <workItem from="1723884007995" duration="5335000" />
+      <workItem from="1723884007995" duration="6801000" />
     </task>
     <servers />
   </component>
