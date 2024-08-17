@@ -24,18 +24,17 @@ public final class StartingUtils {
     }
 
     public static void loadBasicFormatOverrides() {
-        if (!basicFormatOverrides.isEmpty()) basicFormatOverrides.clear();
+        getBasicFormatOverrides().clear();
 
         ConfigurationSection section = CToken.getInstance().getConfiguration().getSection("formatting.basic");
 
         if (section == null) return;
 
-        section.getKeys(false).forEach(key -> {
-            try {
-                basicFormatOverrides.put(Long.parseLong(key), section.getString(key));
-            } catch (NumberFormatException exception) {
-                TokenLogger.error("Invalid formatting key: " + key);
-            }
+        section.getKeys(false)
+                .stream()
+                .filter(key -> section.getString(key) != null)
+                .forEach(key -> {
+            getBasicFormatOverrides().put(Long.parseLong(key), section.getString(key));
         });
     }
 }

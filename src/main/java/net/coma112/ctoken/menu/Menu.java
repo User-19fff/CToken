@@ -4,7 +4,6 @@ import net.coma112.ctoken.enums.keys.ItemKeys;
 import net.coma112.ctoken.processor.MessageProcessor;
 import net.coma112.ctoken.utils.MenuUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -55,8 +54,7 @@ public abstract class Menu implements InventoryHolder {
     }
 
     public void close() {
-        MenuUpdater menuUpdater = new MenuUpdater(this);
-        menuUpdater.stop();
+        new MenuUpdater(this).stop();
         inventory = null;
     }
 

@@ -4,7 +4,6 @@ import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.processor.MessageProcessor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemFlag;
@@ -82,7 +81,6 @@ public interface ItemFactory {
         String name = section.getString("name");
         String[] loreArray = section.getStringList("lore").toArray(new String[0]);
         int customModelData = section.getInt("custom-model-data", 0);
-        int slot = section.getInt("slot", 0);
 
         IntStream.range(0, loreArray.length).forEach(i -> loreArray[i] = MessageProcessor.process(loreArray[i]));
 

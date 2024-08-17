@@ -24,7 +24,8 @@ public enum FormatType {
                 List<Map.Entry<Long, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
                 sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
-                yield sortedEntries.stream()
+                yield sortedEntries
+                        .stream()
                         .filter(entry -> price >= entry.getKey())
                         .findFirst()
                         .map(entry -> {

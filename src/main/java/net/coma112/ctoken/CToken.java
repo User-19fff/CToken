@@ -73,12 +73,14 @@ public final class CToken extends JavaPlugin {
                 case MYSQL, mysql -> {
                     database = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
                     MySQL mysql = (MySQL) database;
+
                     mysql.createTable();
                 }
 
                 case SQLITE, sqlite -> {
                     database = new SQLite();
                     SQLite sqlite = (SQLite) database;
+
                     sqlite.createTable();
                 }
             }

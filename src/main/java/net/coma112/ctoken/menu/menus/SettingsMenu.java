@@ -4,29 +4,19 @@ import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.enums.keys.ConfigKeys;
 import net.coma112.ctoken.enums.keys.ItemKeys;
 import net.coma112.ctoken.enums.keys.MessageKeys;
-import net.coma112.ctoken.menu.PaginatedMenu;
+import net.coma112.ctoken.menu.Menu;
 import net.coma112.ctoken.utils.MenuUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SuppressWarnings("deprecation")
-public class SettingsMenu extends PaginatedMenu {
+public class SettingsMenu extends Menu {
     public SettingsMenu(@NotNull MenuUtils menuUtils) {
         super(menuUtils);
-    }
-
-    @Override
-    public void addMenuBorder() {
-        setFillerItem();
     }
 
     @Override
@@ -52,7 +42,7 @@ public class SettingsMenu extends PaginatedMenu {
     @Override
     public void setMenuItems() {
         inventory.clear();
-        addMenuBorder();
+        setFillerItem();
 
         inventory.setItem(ConfigKeys.TOGGLE_PAY_SLOT.getInt(), ItemKeys.TOGGLE_PAY_ITEM.getItem("{status}", CToken.getDatabase().getPayStatus(menuUtils.getOwner()) ? ConfigKeys.ENABLED.getString() : ConfigKeys.DISABLED.getString()));
         inventory.setItem(ConfigKeys.MINIMUM_PAY_SLOT.getInt(), ItemKeys.SET_MINIMUM_PAY_ITEM.getItem("{value}", String.valueOf(CToken.getDatabase().getMinimumPay(menuUtils.getOwner()))));

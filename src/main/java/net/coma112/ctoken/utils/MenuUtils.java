@@ -4,27 +4,19 @@ import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Getter
 public final class MenuUtils {
     private final Player owner;
-    private static final HashMap<Player, MenuUtils> menuMap = new HashMap<>();
+    private static final Map<Player, MenuUtils> menuMap = new ConcurrentHashMap<>();
 
     public MenuUtils(@NotNull Player player) {
         this.owner = player;
     }
 
     public static MenuUtils getMenuUtils(@NotNull Player player) {
-        MenuUtils menuUtils;
-
-        if (!(menuMap.containsKey(player))) {
-            menuUtils = new MenuUtils(player);
-            menuMap.put(player, menuUtils);
-
-            return menuUtils;
-        }
-
-        return menuMap.get(player);
+        return menuMap.computeIfAbsent(player, MenuUtils::new);
     }
 }

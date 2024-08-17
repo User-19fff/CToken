@@ -11,17 +11,19 @@ import revxrsal.commands.exception.InvalidNumberException;
 import revxrsal.commands.exception.MissingArgumentException;
 import revxrsal.commands.exception.NoPermissionException;
 
+import java.lang.reflect.InvocationTargetException;
+
 public final class RegisterUtils {
     public static void registerListeners() {
         new Reflections("net.coma112.ctoken.listeners")
                 .getSubTypesOf(Listener.class)
                 .forEach(listenerClass -> {
-            try {
-                Bukkit.getServer().getPluginManager().registerEvents(listenerClass.getDeclaredConstructor().newInstance(), CToken.getInstance());
-            } catch (Exception exception) {
-                TokenLogger.error(exception.getMessage());
-            }
-        });
+                    try {
+                        Bukkit.getServer().getPluginManager().registerEvents(listenerClass.getDeclaredConstructor().newInstance(), CToken.getInstance());
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException exception) {
+                        TokenLogger.error(exception.getMessage());
+                    }
+                });
     }
 
     public static void registerCommands() {
