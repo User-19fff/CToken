@@ -321,6 +321,7 @@ public class MySQL extends AbstractDatabase {
     @Override
     public void setBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
+
         updateBalance(Objects.requireNonNull(player.getName()), newBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceSetEvent(player, oldBalance, newBalance));
     }
@@ -329,6 +330,7 @@ public class MySQL extends AbstractDatabase {
     public void addToBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance + newBalance;
+
         updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceAddEvent(player, oldBalance, newBalance));
     }
@@ -357,6 +359,7 @@ public class MySQL extends AbstractDatabase {
     @Override
     public void resetBalance(@NotNull OfflinePlayer player) {
         int oldBalance = getBalance(player);
+
         updateBalance(Objects.requireNonNull(player.getName()), 0);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceResetEvent(player, oldBalance));
     }
@@ -377,6 +380,7 @@ public class MySQL extends AbstractDatabase {
     public void takeFromBalance(@NotNull OfflinePlayer player, int newBalance) {
         int oldBalance = getBalance(player);
         int updatedBalance = oldBalance - newBalance;
+
         updateBalance(Objects.requireNonNull(player.getName()), updatedBalance);
         Bukkit.getServer().getPluginManager().callEvent(new BalanceTakeEvent(player, oldBalance, newBalance));
     }

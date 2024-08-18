@@ -19,27 +19,30 @@ public enum MinecraftVersion {
     v1_20_R2,
     v1_20_R3,
     v1_20_R6,
-    v1_21_R1;
+    v1_21_R1,
+    v1_21_R2;
 
     private static MinecraftVersion serverVersion;
 
     static {
         String bukkitVersion = Bukkit.getVersion();
-        Pattern pattern = Pattern.compile("\\(MC: (\\d+)(?:\\.(\\d+))?\\)");
+        Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
         Matcher matcher = pattern.matcher(bukkitVersion);
 
         if (matcher.find()) {
             try {
-                int major = 1;
-                int minor = Integer.parseInt(matcher.group(1));
-                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0;
+                int major = Integer.parseInt(matcher.group(1));
+                int minor = Integer.parseInt(matcher.group(2));
+                int patch = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
 
                 serverVersion = determineVersion(major, minor, patch);
             } catch (NumberFormatException exception) {
                 serverVersion = UNKNOWN;
             }
+        } else {
+            serverVersion = UNKNOWN;
+            TokenLogger.error("Could not determine the server version from Bukkit version string: " + bukkitVersion);
         }
-
     }
 
     public static MinecraftVersion determineVersion(int major, int minor, int patch) {
@@ -53,7 +56,6 @@ public enum MinecraftVersion {
                     case 4 -> v1_19_R4;
                     default -> UNKNOWN;
                 };
-
                 case 20 -> switch (patch) {
                     case 1 -> v1_20_R1;
                     case 2 -> v1_20_R2;
@@ -61,7 +63,6 @@ public enum MinecraftVersion {
                     case 6 -> v1_20_R6;
                     default -> UNKNOWN;
                 };
-
                 case 21 -> v1_21_R1;
                 default -> UNKNOWN;
             };

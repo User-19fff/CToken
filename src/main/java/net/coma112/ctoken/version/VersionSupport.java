@@ -5,6 +5,7 @@ import net.coma112.ctoken.interfaces.ServerVersionSupport;
 import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.yaml.snakeyaml.tokens.Token;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -13,10 +14,10 @@ public class VersionSupport {
     private final ServerVersionSupport versionSupport;
 
     public VersionSupport(@NotNull Plugin plugin, @NotNull MinecraftVersion version) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        if (version == MinecraftVersion.UNKNOWN) throw new IllegalArgumentException("VERSION NOT FOUND!!!");
+        if (version == MinecraftVersion.UNKNOWN) TokenLogger.error("VERSION NOT FOUND!");
 
 
-        Class<?> clazz = Class.forName("net.coma112.ctoken.version.nms." + version.name() + ".Version");
+        Class<?> clazz = Class.forName("net.coma112.ctoken.version.nms." + version.name() + ".ServerVersion");
         versionSupport = (ServerVersionSupport) clazz.getConstructor(Plugin.class).newInstance(plugin);
 
         if (!versionSupport.isSupported()) {

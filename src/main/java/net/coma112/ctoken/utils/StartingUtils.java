@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.version.MinecraftVersion;
 import net.coma112.ctoken.interfaces.ServerVersionSupport;
+import net.coma112.ctoken.version.VersionSupport;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
@@ -42,13 +43,14 @@ public final class StartingUtils {
                 .stream()
                 .filter(key -> section.getString(key) != null)
                 .forEach(key -> {
-            getBasicFormatOverrides().put(Long.parseLong(key), section.getString(key));
-        });
+                    getBasicFormatOverrides().put(Long.parseLong(key), section.getString(key));
+                });
     }
 
     public static void checkVM() {
         int vmVersion = getVMVersion();
-        if (vmVersion < 11) {
+
+        if (vmVersion < 18) {
             Bukkit.getPluginManager().disablePlugin(CToken.getInstance());
             return;
         }
@@ -65,13 +67,14 @@ public final class StartingUtils {
             Class.forName("org.spigotmc.SpigotConfig");
         } catch (Exception ignored) {
             isSupported = false;
+            TokenLogger.error("SpigotConfig class not found. This might indicate an unsupported server.");
             return;
         }
 
         try {
-            String bukkitVersion = Bukkit.getVersion();
-            Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
-            Matcher matcher = pattern.matcher(bukkitVersion);
+            TokenLogger.info("Detected Bukkit version string: " + Bukkit.getVersion());
+            Pattern pattern = Pattern.compile("\\(MC: (\\d{1,2})\\.(\\d{1,2})(?:\\.(\\d{1,2}))?\\)");
+            Matcher matcher = pattern.matcher(Bukkit.getVersion());
 
             if (matcher.find()) {
                 int majorVersion = Integer.parseInt(matcher.group(1));
@@ -81,18 +84,27 @@ public final class StartingUtils {
 
                 if (version == MinecraftVersion.UNKNOWN) {
                     isSupported = false;
+
+                    TokenLogger.error("Unknown Minecraft version: " + majorVersion + "." + minorVersion + "." + patchVersion);
                     return;
                 }
 
-                net.coma112.ctoken.version.VersionSupport support = new net.coma112.ctoken.version.VersionSupport(CToken.getInstance() ,version);
-                ServerVersionSupport nms = support.getVersionSupport();
-                isSupported = nms != null;
+                isSupported = new VersionSupport(CToken.getInstance(), version).getVersionSupport() != null;
 
-            } else isSupported = false;
+            }
         } catch (Exception exception) {
             isSupported = false;
+
+            TokenLogger.error("Exception occurred during version check: " + exception.getMessage());
+        }
+
+        if (!isSupported) {
+            TokenLogger.error("This version of CToken is not supported on this server version.");
+            TokenLogger.error("Please consider updating your server version to a newer version.");
+            Bukkit.getPluginManager().disablePlugin(CToken.getInstance());
         }
     }
+
 
     static int getVMVersion() {
         String javaVersion = System.getProperty("java.version");

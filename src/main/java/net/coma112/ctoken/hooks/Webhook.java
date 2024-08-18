@@ -189,7 +189,7 @@ public class Webhook {
     }
 
     public void execute() throws IOException, URISyntaxException {
-        if (this.content == null && this.embeds.isEmpty()) throw new IllegalArgumentException("Error!");
+        if (this.content == null && this.embeds.isEmpty()) TokenLogger.error("Empty content in Webhook!");
 
         JSONObject json = new JSONObject();
 
@@ -295,7 +295,9 @@ public class Webhook {
         private final HashMap<String, Object> map = new HashMap<>();
 
         void put(@NotNull String key, @Nullable Object value) {
-            if (value != null) map.put(key, value);
+            if (value == null) return;
+
+            map.put(key, value);
         }
 
         @Override

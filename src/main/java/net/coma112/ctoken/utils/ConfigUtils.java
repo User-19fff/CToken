@@ -52,13 +52,14 @@ public class ConfigUtils {
         this.name = name;
 
         try (InputStream defaultConfigStream = getClass().getClassLoader().getResourceAsStream(name + ".yml")) {
-            if (defaultConfigStream != null) {
-                this.defaultYml = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultConfigStream));
 
-                yml.options().copyDefaults(true);
-                addMissingKeys();
-                TokenLogger.info("Loaded " + name + ".yml");
-            }
+            if (defaultConfigStream == null) return;
+
+            this.defaultYml = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultConfigStream));
+
+            yml.options().copyDefaults(true);
+            addMissingKeys();
+            TokenLogger.info("Loaded " + name + ".yml");
         } catch (IOException exception) {
             TokenLogger.error("Error loading default config: " + exception.getMessage());
         }
@@ -71,7 +72,7 @@ public class ConfigUtils {
         save();
     }
 
-    public void set(@NotNull String path, Object value) {
+    public void set(@NotNull String path, @NotNull Object value) {
         yml.set(path, value);
         save();
     }

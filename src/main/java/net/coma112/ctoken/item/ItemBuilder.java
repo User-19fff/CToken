@@ -72,8 +72,8 @@ public class ItemBuilder implements ItemFactory {
     }
 
     @Override
-    public ItemBuilder addLore(@NotNull String... lores) {
-        List<String> loreList = Arrays.asList(lores);
+    public ItemBuilder addLore(@NotNull String... lore) {
+        List<String> loreList = Arrays.asList(lore);
         List<String> currentLores = meta.getLore();
         currentLores = currentLores == null ? new ArrayList<>() : currentLores;
         currentLores.addAll(loreList);

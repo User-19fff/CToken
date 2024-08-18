@@ -273,16 +273,14 @@ public class CommandToken {
                             MessageKeys.WORTH_ITEM.getMessage()
                                     .replace("{item}", item.getType().name().replace("_", " "))
                                     .replace("{amount}", String.valueOf(item.getAmount()))
-                                    .replace("{value}", FormatType.format(itemTotalValue))
+                                    .replace("{value}", FormatType.format(itemTotalValue)) + "\n \n"
                     );
-                    inventoryLines.add("\n \n");
                 });
 
         if (totalValue.get() > 0) {
             inventoryLines.add(MessageKeys.WORTH_TOTAL
                     .getMessage()
-                    .replace("{total}", FormatType.format(totalValue.get())));
-            inventoryLines.add("\n \n");
+                    .replace("{total}", FormatType.format(totalValue.get())) + "\n \n");
 
             player.sendMessage(String.join("", inventoryLines));
         } else player.sendMessage(MessageKeys.NO_VALUE.getMessage());

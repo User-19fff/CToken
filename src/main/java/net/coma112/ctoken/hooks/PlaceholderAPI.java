@@ -41,8 +41,8 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             try {
                 int pos = Integer.parseInt(params.split("_")[1]);
 
-                if (CToken.getDatabase().getTopPlayer(pos) != null) return CToken.getDatabase().getTopPlayer(pos);
-                return "---";
+                if (CToken.getDatabase().getTopPlayer(pos) == null) return "---";
+                return CToken.getDatabase().getTopPlayer(pos);
             } catch (Exception exception) {
                 return "";
             }
@@ -52,8 +52,8 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             try {
                 int pos = Integer.parseInt(params.split("_")[1]);
 
-                if (CToken.getDatabase().getTopBalance(pos) != 0) return FormatType.format(CToken.getDatabase().getTopBalance(pos));
-                return "---";
+                if (CToken.getDatabase().getTopBalance(pos) == 0) return "---";
+                return FormatType.format(CToken.getDatabase().getTopBalance(pos));
             } catch (Exception exception) {
                 return "";
             }
@@ -63,12 +63,11 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             case "balance" -> FormatType.format(CToken.getDatabase().getBalance(player));
 
             case "badge" -> {
-                if (ConfigKeys.BADGES_ENABLED.getBoolean()) yield BadgeType.convertXPToBadge(CToken.getDatabase().getXP(player)).getDisplayName();
-                yield "----";
+                if (!ConfigKeys.BADGES_ENABLED.getBoolean()) yield "---";
+                yield BadgeType.convertXPToBadge(CToken.getDatabase().getXP(player)).getDisplayName();
             }
 
             case "xp" -> FormatType.format(CToken.getDatabase().getXP(player));
-
             default -> "";
         };
     }

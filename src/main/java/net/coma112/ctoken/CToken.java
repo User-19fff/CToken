@@ -39,12 +39,12 @@ public final class CToken extends JavaPlugin {
         instance = this;
         scheduler = UniversalScheduler.getScheduler(this);
 
-        //checkVersion();
+        checkVersion();
     }
 
     @Override
     public void onEnable() {
-        //checkVM();
+        checkVM();
         saveDefaultConfig();
         initializeComponents();
         initializeDatabaseManager();

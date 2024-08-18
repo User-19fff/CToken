@@ -51,7 +51,7 @@ public interface ItemFactory {
     }
     ItemBuilder setCustomModelData(int customModelData);
 
-    ItemBuilder addLore(@NotNull String... lores);
+    ItemBuilder addLore(@NotNull String... lore);
 
     ItemFactory setUnbreakable();
 
@@ -61,9 +61,9 @@ public interface ItemFactory {
                 .forEach(this::addFlag);
     }
 
-    default ItemFactory setLore(@NotNull String... lores) {
+    default ItemFactory setLore(@NotNull String... lore) {
         Arrays
-                .stream(lores)
+                .stream(lore)
                 .forEach(this::addLore);
         return this;
     }

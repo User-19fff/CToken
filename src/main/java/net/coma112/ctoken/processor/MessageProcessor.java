@@ -17,7 +17,6 @@ public class MessageProcessor {
         while (matcher.find()) {
             String hexCode = message.substring(matcher.start(), matcher.end());
             String replaceSharp = hexCode.replace('#', 'x');
-
             StringBuilder builder = new StringBuilder();
 
             for (char c : replaceSharp.toCharArray()) builder.append("&").append(c);
