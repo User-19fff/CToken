@@ -14,9 +14,9 @@ public record TokenTop(@NotNull String playerName, int balance) {
         List<TokenTop> topBalance = CToken.getDatabase().getTop(value);
         List<String> tokenTopLines = new ArrayList<>();
 
-        tokenTopLines.add("\n \n");
-        tokenTopLines.add(MessageKeys.TOKEN_TOP_HEADER.getMessage().replace("{value}", String.valueOf(value)));
-        tokenTopLines.add("\n \n");
+        tokenTopLines.add("\n \n" + MessageKeys.TOKEN_TOP_HEADER
+                .getMessage()
+                .replace("{value}", String.valueOf(value)) + "\n \n");
 
         IntStream
                 .range(0, topBalance.size())
@@ -24,8 +24,7 @@ public record TokenTop(@NotNull String playerName, int balance) {
             tokenTopLines.add(MessageKeys.TOKEN_TOP_LINE.getMessage()
                     .replace("{place}", String.valueOf(index + 1))
                     .replace("{player}", topBalance.get(index).playerName())
-                    .replace("{balance}", FormatType.format(topBalance.get(index).balance())));
-            tokenTopLines.add("\n \n");
+                    .replace("{balance}", FormatType.format(topBalance.get(index).balance())) + "\n \n");
         });
 
         return String.join("\n", tokenTopLines);

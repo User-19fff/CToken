@@ -4,6 +4,7 @@ import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.processor.MessageProcessor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemFlag;
@@ -72,6 +73,14 @@ public interface ItemFactory {
     ItemStack finish();
 
     boolean isFinished();
+
+    static int getSlot(@NotNull String path) {
+        ConfigurationSection section = CToken.getInstance().getConfiguration().getSection(path);
+
+        if (section == null) return 0;
+
+        return section.getInt("slot", 0);
+    }
 
     static ItemStack createItemFromString(@NotNull String path) {
         ConfigurationSection section = CToken.getInstance().getConfiguration().getSection(path);

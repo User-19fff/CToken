@@ -78,7 +78,7 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
@@ -93,7 +93,7 @@ public class CommandToken {
     @Subcommand("balance")
     @CommandPermission("ctoken.balance")
     public void balance(@NotNull CommandSender sender, @NotNull @Default("me") OfflinePlayer target) {
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
@@ -108,7 +108,7 @@ public class CommandToken {
     @CommandPermission("ctoken.pay")
     @Usage("/ctoken pay (target) (value)")
     public void pay(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
@@ -165,7 +165,7 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
@@ -181,7 +181,7 @@ public class CommandToken {
     @CommandPermission("ctoken.set")
     @Usage("/ctoken set (target) (value)")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }
@@ -207,7 +207,7 @@ public class CommandToken {
     @CommandPermission("ctoken.take")
     @Usage("/ctoken add (input) (value)")
     public void take(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        if (!target.hasPlayedBefore()) {
+        if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
             return;
         }

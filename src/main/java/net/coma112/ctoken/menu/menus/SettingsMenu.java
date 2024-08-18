@@ -44,8 +44,8 @@ public class SettingsMenu extends Menu {
         inventory.clear();
         setFillerItem();
 
-        inventory.setItem(ConfigKeys.TOGGLE_PAY_SLOT.getInt(), ItemKeys.TOGGLE_PAY_ITEM.getItem("{status}", CToken.getDatabase().getPayStatus(menuUtils.getOwner()) ? ConfigKeys.ENABLED.getString() : ConfigKeys.DISABLED.getString()));
-        inventory.setItem(ConfigKeys.MINIMUM_PAY_SLOT.getInt(), ItemKeys.SET_MINIMUM_PAY_ITEM.getItem("{value}", String.valueOf(CToken.getDatabase().getMinimumPay(menuUtils.getOwner()))));
+        ItemKeys.TOGGLE_PAY_ITEM.getItem("{status}", CToken.getDatabase().getPayStatus(menuUtils.getOwner()) ? ConfigKeys.ENABLED.getString() : ConfigKeys.DISABLED.getString(), inventory);
+        ItemKeys.SET_MINIMUM_PAY_ITEM.getItem("{value}", String.valueOf(CToken.getDatabase().getMinimumPay(menuUtils.getOwner())), inventory);
     }
 
     @Override
