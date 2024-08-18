@@ -40,6 +40,8 @@ public enum MessageKeys {
     ENABLE_PAY("message.enable-pay"),
     WORTH_ITEM("message.worth.item"),
     WORTH_TOTAL("message.worth.total"),
+    TOKEN_TOP_HEADER("message.token-top.header"),
+    TOKEN_TOP_LINE("message.token-top.line"),
     HELP("message.help");
 
     private final String path;

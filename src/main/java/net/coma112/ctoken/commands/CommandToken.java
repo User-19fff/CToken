@@ -239,7 +239,7 @@ public class CommandToken {
             return;
         }
 
-        sender.spigot().sendMessage(TokenTop.getTopDatabase(value));
+        sender.sendMessage(TokenTop.getTopDatabase(value));
     }
 
     @Subcommand("settings")
