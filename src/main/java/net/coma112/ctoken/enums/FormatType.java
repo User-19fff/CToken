@@ -18,10 +18,13 @@ public enum FormatType {
         if (!ConfigKeys.FORMATTING_ENABLED.getBoolean()) return String.valueOf(price);
 
         return switch (FormatType.valueOf(ConfigKeys.FORMATTING_TYPE.getString())) {
-            case DOT, dot -> String.format("%,d", price).replace(",", ".");
+            case DOT, dot -> String
+                    .format("%,d", price)
+                    .replace(",", ".");
             case COMMAS, commas -> String.format("%,d", price);
             case BASIC, basic -> {
-                List<Map.Entry<Long, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
+                List<Map.Entry<Long, String>> sortedEntries = Collections.synchronizedList(new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet()));
+
                 sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
                 yield sortedEntries

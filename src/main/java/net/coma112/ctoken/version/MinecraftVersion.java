@@ -41,14 +41,19 @@ public enum MinecraftVersion {
             }
         } else {
             serverVersion = UNKNOWN;
-            TokenLogger.error("Could not determine the server version from Bukkit version string: " + bukkitVersion);
+            TokenLogger.error("### Could not determine the server version from Bukkit version string: {} ###", bukkitVersion);
         }
     }
 
     public static MinecraftVersion determineVersion(int major, int minor, int patch) {
         if (major == 1) {
             return switch (minor) {
-                case 18 -> (patch == 1) ? v1_18_R1 : (patch == 2) ? v1_18_R2 : UNKNOWN;
+                case 18 -> switch (patch) {
+                    case 1 -> v1_18_R1;
+                    case 2 -> v1_18_R2;
+                    default -> UNKNOWN;
+                };
+
                 case 19 -> switch (patch) {
                     case 1 -> v1_19_R1;
                     case 2 -> v1_19_R2;
@@ -56,6 +61,7 @@ public enum MinecraftVersion {
                     case 4 -> v1_19_R4;
                     default -> UNKNOWN;
                 };
+
                 case 20 -> switch (patch) {
                     case 1 -> v1_20_R1;
                     case 2 -> v1_20_R2;
@@ -63,7 +69,13 @@ public enum MinecraftVersion {
                     case 6 -> v1_20_R6;
                     default -> UNKNOWN;
                 };
-                case 21 -> v1_21_R1;
+
+                case 21 -> switch (patch) {
+                    case 1 -> v1_21_R1;
+                    case 2 -> v1_21_R2;
+                    default -> UNKNOWN;
+                };
+
                 default -> UNKNOWN;
             };
         }

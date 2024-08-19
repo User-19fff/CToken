@@ -44,18 +44,18 @@ public class PlaceholderAPI extends PlaceholderExpansion {
                 if (CToken.getDatabase().getTopPlayer(pos) == null) return "---";
                 return CToken.getDatabase().getTopPlayer(pos);
             } catch (Exception exception) {
-                return "";
+                return "--- ";
             }
         }
 
-        if (params.startsWith("topbal_")) {
+        if (params.startsWith("top_balance_")) {
             try {
-                int pos = Integer.parseInt(params.split("_")[1]);
+                int pos = Integer.parseInt(params.split("_")[2]);
 
                 if (CToken.getDatabase().getTopBalance(pos) == 0) return "---";
                 return FormatType.format(CToken.getDatabase().getTopBalance(pos));
             } catch (Exception exception) {
-                return "";
+                return "---";
             }
         }
 
@@ -68,7 +68,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             }
 
             case "xp" -> FormatType.format(CToken.getDatabase().getXP(player));
-            default -> "";
+            default -> "---";
         };
     }
 }

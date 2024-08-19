@@ -6,13 +6,14 @@ import net.coma112.ctoken.enums.keys.MessageKeys;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public record TokenTop(@NotNull String playerName, int balance) {
     public static String getTopDatabase(int value) {
         List<TokenTop> topBalance = CToken.getDatabase().getTop(value);
-        List<String> tokenTopLines = new ArrayList<>();
+        List<String> tokenTopLines = Collections.synchronizedList(new ArrayList<>());
 
         tokenTopLines.add("\n \n" + MessageKeys.TOKEN_TOP_HEADER
                 .getMessage()

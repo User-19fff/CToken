@@ -40,7 +40,6 @@ public abstract class Menu implements InventoryHolder {
         inventory = Bukkit.createInventory(this, getSlots(), MessageProcessor.process(getMenuName()));
 
         this.setMenuItems();
-
         menuUtils.getOwner().openInventory(inventory);
         new MenuUpdater(this).start(getMenuTick());
     }
@@ -48,20 +47,25 @@ public abstract class Menu implements InventoryHolder {
     public void setFillerItem() {
         if (!enableFillerItem()) return;
 
-        IntStream.range(0, getSlots()).forEach(index -> {
-            if (inventory.getItem(index) == null) inventory.setItem(index, ItemKeys.FILLER_ITEM.getItem());
+        IntStream
+                .range(0, getSlots())
+                .forEach(index -> {
+                    if (inventory.getItem(index) != null) return;
+
+                    inventory.setItem(index, ItemKeys.FILLER_ITEM.getItem());
         });
     }
 
     public void close() {
         new MenuUpdater(this).stop();
+
         inventory = null;
     }
 
     public void updateMenuItems() {
-        if (inventory != null) {
-            setMenuItems();
-            menuUtils.getOwner().updateInventory();
-        }
+        if (inventory == null) return;
+
+        setMenuItems();
+        menuUtils.getOwner().updateInventory();
     }
 }

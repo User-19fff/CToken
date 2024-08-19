@@ -57,7 +57,7 @@ public final class CToken extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (database != null) database.disconnect();
+        if (getDatabase() != null) getDatabase().disconnect();
     }
 
     public Config getConfiguration() {
@@ -77,17 +77,21 @@ public final class CToken extends JavaPlugin {
         try {
             switch (DatabaseType.valueOf(ConfigKeys.DATABASE.getString())) {
                 case MYSQL, mysql -> {
+                    TokenLogger.info("### MySQL support found! Starting to initializing it... ###");
                     database = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
                     MySQL mysql = (MySQL) database;
 
                     mysql.createTable();
+                    TokenLogger.info("### MySQL database has been successfully initialized! ###");
                 }
 
                 case SQLITE, sqlite -> {
+                    TokenLogger.info("### SQLite support found! Starting to initializing it... ###");
                     database = new SQLite();
                     SQLite sqlite = (SQLite) database;
 
                     sqlite.createTable();
+                    TokenLogger.info("### SQLite database has been successfully initialized! ###");
                 }
             }
         } catch (SQLException | ClassNotFoundException exception) {

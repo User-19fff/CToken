@@ -10,8 +10,8 @@ public class ServerVersion implements ServerVersionSupport {
 
     @Contract(pure = true)
     public ServerVersion(@NotNull Plugin plugin) {
-        TokenLogger.info("Loading support for version 1.19.3...");
-        TokenLogger.info("Support for 1.19.3 is loaded!");
+        TokenLogger.info("### Loading support for version 1.19.3... ###");
+        TokenLogger.info("### Support for 1.19.3 is loaded! ###");
     }
 
     @Override

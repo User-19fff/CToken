@@ -30,7 +30,7 @@ public class ConfigUtils {
 
         if (!file.exists()) {
             if (!file.mkdirs()) {
-                TokenLogger.error("Failed to create directories: " + dir);
+                TokenLogger.error("### Failed to create directories: {} ###", dir);
                 return;
             }
         }
@@ -40,11 +40,11 @@ public class ConfigUtils {
         if (!config.exists()) {
             try {
                 if (!config.createNewFile()) {
-                    TokenLogger.error("Failed to create config file: " + config.getAbsolutePath());
+                    TokenLogger.error("### Failed to create config file: {} ###", config.getAbsolutePath());
                     return;
                 }
             } catch (IOException exception) {
-                TokenLogger.error("Error creating config file: " + exception.getMessage());
+                TokenLogger.error("### Error creating config file: {} ###", exception.getMessage());
             }
         }
 
@@ -59,9 +59,9 @@ public class ConfigUtils {
 
             yml.options().copyDefaults(true);
             addMissingKeys();
-            TokenLogger.info("Loaded " + name + ".yml");
+            TokenLogger.info("### Successfully loaded {}.yml ###",name);
         } catch (IOException exception) {
-            TokenLogger.error("Error loading default config: " + exception.getMessage());
+            TokenLogger.error("### Error loading default config: {} ###", exception.getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ public class ConfigUtils {
         try {
             yml.save(config);
         } catch (IOException exception) {
-            TokenLogger.error("Error saving config file: " + exception.getMessage());
+            TokenLogger.error("### Error saving config file: {} ###", exception.getMessage());
         }
     }
 

@@ -9,6 +9,7 @@ import net.coma112.ctoken.manager.TokenTop;
 import net.coma112.ctoken.menu.menus.SettingsMenu;
 import net.coma112.ctoken.utils.MenuUtils;
 import net.coma112.ctoken.utils.StartingUtils;
+import net.coma112.ctoken.utils.TokenUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -24,19 +25,14 @@ import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static net.coma112.ctoken.utils.TokenUtils.sendSellMessage;
+import static net.coma112.ctoken.utils.TokenUtils.*;
 
 @Command({"ctoken", "token"})
-@SuppressWarnings("deprecation")
 public class CommandToken {
     @Subcommand("help")
     @DefaultFor({"token", "ctoken"})
@@ -60,12 +56,7 @@ public class CommandToken {
     @CommandPermission("ctoken.add")
     @Usage("/ctoken add (input) (value)")
     public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
-        if (value <= 0) {
-            sender.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
+        handleInvalidValue(sender, value);
 
         if (input.equals("*")) {
             CToken.getDatabase().addToEveryoneBalance(value);
@@ -78,10 +69,7 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        if (!CToken.getDatabase().exists(target)) {
-            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
+        handleNonTarget(sender, target);
 
         CToken.getDatabase().addToBalance(target, value);
         sender.sendMessage(MessageKeys.ADD_SENDER
@@ -93,10 +81,7 @@ public class CommandToken {
     @Subcommand("balance")
     @CommandPermission("ctoken.balance")
     public void balance(@NotNull CommandSender sender, @NotNull @Default("me") OfflinePlayer target) {
-        if (!CToken.getDatabase().exists(target)) {
-            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
+        handleNonTarget(sender, target);
 
         sender.sendMessage(MessageKeys.BALANCE
                 .getMessage()
@@ -108,17 +93,8 @@ public class CommandToken {
     @CommandPermission("ctoken.pay")
     @Usage("/ctoken pay (target) (value)")
     public void pay(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
-        if (!CToken.getDatabase().exists(target)) {
-            player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
-
-        if (value <= 0) {
-            player.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
+        handleNonTarget(player, target);
+        handleInvalidValue(player, value);
 
         if (CToken.getDatabase().getBalance(target) < value) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
@@ -165,10 +141,7 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        if (!CToken.getDatabase().exists(target)) {
-            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
+        handleNonTarget(sender, target);
 
         CToken.getDatabase().resetBalance(target);
         sender.sendMessage(MessageKeys.RESET_SENDER
@@ -181,17 +154,8 @@ public class CommandToken {
     @CommandPermission("ctoken.set")
     @Usage("/ctoken set (target) (value)")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        if (!CToken.getDatabase().exists(target)) {
-            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
-
-        if (value < 0) {
-            sender.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
+        handleNonTarget(sender, target);
+        handleNullableValue(sender, value);
 
         CToken.getDatabase().setBalance(target, value);
         sender.sendMessage(MessageKeys.SET_SENDER
@@ -207,17 +171,8 @@ public class CommandToken {
     @CommandPermission("ctoken.take")
     @Usage("/ctoken add (input) (value)")
     public void take(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        if (!CToken.getDatabase().exists(target)) {
-            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
-        }
-
-        if (value <= 0) {
-            sender.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
+        handleNonTarget(sender, target);
+        handleInvalidValue(sender, value);
 
         CToken.getDatabase().takeFromBalance(target, value);
         sender.sendMessage(MessageKeys.TAKE_SENDER
@@ -232,12 +187,7 @@ public class CommandToken {
     @Subcommand("top")
     @CommandPermission("ctoken.top")
     public void top(@NotNull CommandSender sender, @Default("5") int value) {
-        if (value <= 0) {
-            sender.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
+        handleInvalidValue(sender, value);
 
         sender.sendMessage(TokenTop.getTopDatabase(value));
     }
@@ -258,7 +208,7 @@ public class CommandToken {
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> (Integer) entry.getValue()));
 
         AtomicInteger totalValue = new AtomicInteger(0);
-        List<String> inventoryLines = new ArrayList<>();
+        List<String> inventoryLines = Collections.synchronizedList(new ArrayList<>());
 
         inventoryLines.add("\n \n" + MessageKeys.WORTH_HEADER.getMessage() + "\n \n");
 
@@ -283,7 +233,9 @@ public class CommandToken {
                     .replace("{total}", FormatType.format(totalValue.get())) + "\n \n");
 
             player.sendMessage(String.join("", inventoryLines));
-        } else player.sendMessage(MessageKeys.NO_VALUE.getMessage());
+        }
+
+        player.sendMessage(MessageKeys.NO_VALUE.getMessage());
     }
 
     @Subcommand("sell")

@@ -22,8 +22,8 @@ public class MenuListener implements Listener {
     @EventHandler
     public void onClose(final InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        Inventory inventory = new SettingsMenu(MenuUtils.getMenuUtils(player)).getInventory();
+        SettingsMenu menu = new SettingsMenu(MenuUtils.getMenuUtils(player));
 
-        if (event.getInventory().equals(inventory)) inventory.close();
+        if (event.getInventory().equals(menu.getInventory())) menu.close();
     }
 }

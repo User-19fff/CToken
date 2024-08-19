@@ -24,15 +24,17 @@ public class MenuUpdater {
     }
 
     public void start(int intervalTicks) {
-        if (task == null) task = CToken.getInstance().getScheduler().runTaskTimer(this::run, intervalTicks, intervalTicks);
+        if (task != null) return;
+
+        task = CToken.getInstance().getScheduler().runTaskTimer(this::run, intervalTicks, intervalTicks);
     }
 
     public void stop() {
         running = false;
 
-        if (task != null) {
-            task.cancel();
-            task = null;
-        }
+        if (task == null) return;
+
+        task.cancel();
+        task = null;
     }
 }

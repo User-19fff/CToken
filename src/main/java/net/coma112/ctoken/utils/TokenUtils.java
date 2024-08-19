@@ -1,9 +1,12 @@
 package net.coma112.ctoken.utils;
 
+import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.enums.FormatType;
 import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.interfaces.PlaceholderProvider;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.bukkit.core.BukkitActor;
@@ -34,6 +37,47 @@ public final class TokenUtils {
         sendMessage(actor.as(BukkitActor.class), MessageKeys.MISSING_ARGUMENT
                 .getMessage()
                 .replace("{usage}", context.getCommand().getUsage()));
+    }
+
+    public static void handleNonTarget(@NotNull CommandSender sender, @NotNull OfflinePlayer target) {
+        if (!CToken.getDatabase().exists(target)) {
+            sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
+            return;
+        }
+    }
+
+    public static void handleNonTarget(@NotNull Player player, @NotNull OfflinePlayer target) {
+        if (!CToken.getDatabase().exists(target)) {
+            player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
+            return;
+        }
+    }
+
+    public static void handleInvalidValue(@NotNull Player player, int value) {
+        if (value <= 0) {
+            player.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
+            return;
+        }
+    }
+
+    public static void handleInvalidValue(@NotNull CommandSender sender, int value) {
+        if (value <= 0) {
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
+            return;
+        }
+    }
+
+    public static void handleNullableValue(@NotNull CommandSender sender, int value) {
+        if (value < 0) {
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
+            return;
+        }
     }
 
     public static void handleEvent(@NotNull String webhookKey, @NotNull PlaceholderProvider event) {
