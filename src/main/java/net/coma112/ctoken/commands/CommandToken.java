@@ -16,11 +16,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import revxrsal.commands.annotation.Command;
-import revxrsal.commands.annotation.DefaultFor;
-import revxrsal.commands.annotation.Subcommand;
-import revxrsal.commands.annotation.Usage;
-import revxrsal.commands.annotation.Default;
+import revxrsal.commands.annotation.*;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.io.IOException;
@@ -34,8 +30,7 @@ import static net.coma112.ctoken.utils.TokenUtils.*;
 
 @Command({"ctoken", "token"})
 public class CommandToken {
-    @Subcommand("help")
-    @DefaultFor({"token", "ctoken"})
+    @DefaultFor({"~", "~ help"})
     @CommandPermission("ctoken.help")
     public void help(@NotNull CommandSender sender) {
         MessageKeys.HELP
@@ -56,7 +51,7 @@ public class CommandToken {
     @CommandPermission("ctoken.add")
     @Usage("/ctoken add (input) (value)")
     public void add(@NotNull CommandSender sender, @NotNull String input, int value) {
-        handleInvalidValue(sender, value);
+        if (!handleInvalidValue(sender, value)) return;
 
         if (input.equals("*")) {
             CToken.getDatabase().addToEveryoneBalance(value);
@@ -69,7 +64,8 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        handleNonTarget(sender, target);
+        if (!handleNonTarget(sender, target)) return;
+        if (!handleMaximumBalance(sender, target, value)) return;
 
         CToken.getDatabase().addToBalance(target, value);
         sender.sendMessage(MessageKeys.ADD_SENDER
@@ -81,7 +77,7 @@ public class CommandToken {
     @Subcommand("balance")
     @CommandPermission("ctoken.balance")
     public void balance(@NotNull CommandSender sender, @NotNull @Default("me") OfflinePlayer target) {
-        handleNonTarget(sender, target);
+        if (!handleNonTarget(sender, target)) return;
 
         sender.sendMessage(MessageKeys.BALANCE
                 .getMessage()
@@ -93,8 +89,8 @@ public class CommandToken {
     @CommandPermission("ctoken.pay")
     @Usage("/ctoken pay (target) (value)")
     public void pay(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
-        handleNonTarget(player, target);
-        handleInvalidValue(player, value);
+        if (!handleNonTarget(player, target)) return;
+        if (!handleInvalidValue(player, value)) return;
 
         if (CToken.getDatabase().getBalance(target) < value) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
@@ -116,13 +112,15 @@ public class CommandToken {
             return;
         }
 
+        if (!handleMaximumBalance(player, target, value)) return;
+
         CToken.getDatabase().addToBalance(target, value);
         CToken.getDatabase().takeFromBalance(player, value);
         player.sendMessage(MessageKeys.PAY_SENDER
                 .getMessage()
                 .replace("{value}", FormatType.format(value))
                 .replace("{target}", Objects.requireNonNull(target.getName())));
-        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.PAY_TARGET
+        sendMessageToOfflinePlayer(target, MessageKeys.PAY_TARGET
                 .getMessage()
                 .replace("{player}", player.getName())
                 .replace("{value}", FormatType.format(value)));
@@ -141,28 +139,30 @@ public class CommandToken {
 
         OfflinePlayer target = Bukkit.getOfflinePlayer(input);
 
-        handleNonTarget(sender, target);
+        if (!handleNonTarget(sender, target)) return;
 
         CToken.getDatabase().resetBalance(target);
         sender.sendMessage(MessageKeys.RESET_SENDER
                 .getMessage()
                 .replace("{target}", Objects.requireNonNull(target.getName())));
-        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.RESET_TARGET.getMessage());
+        sendMessageToOfflinePlayer(target, MessageKeys.RESET_TARGET.getMessage());
     }
 
     @Subcommand("set")
     @CommandPermission("ctoken.set")
     @Usage("/ctoken set (target) (value)")
+    @AutoComplete("@players")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        handleNonTarget(sender, target);
-        handleNullableValue(sender, value);
+        if (!handleNonTarget(sender, target)) return;
+        if (!handleNullableValue(sender, value)) return;
+        if (!handleMaximumBalance(sender, target, value)) return;
 
         CToken.getDatabase().setBalance(target, value);
         sender.sendMessage(MessageKeys.SET_SENDER
                 .getMessage()
                 .replace("{value}", FormatType.format(value))
                 .replace("{target}", Objects.requireNonNull(target.getName())));
-        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.SET_TARGET
+        sendMessageToOfflinePlayer(target, MessageKeys.SET_TARGET
                 .getMessage()
                 .replace("{value}", FormatType.format(value)));
     }
@@ -171,15 +171,15 @@ public class CommandToken {
     @CommandPermission("ctoken.take")
     @Usage("/ctoken add (input) (value)")
     public void take(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
-        handleNonTarget(sender, target);
-        handleInvalidValue(sender, value);
+        if (!handleNonTarget(sender, target)) return;
+        if (!handleInvalidValue(sender, value)) return;
 
         CToken.getDatabase().takeFromBalance(target, value);
         sender.sendMessage(MessageKeys.TAKE_SENDER
                 .getMessage()
                 .replace("{value}", FormatType.format(value))
                 .replace("{target}", Objects.requireNonNull(target.getName())));
-        Objects.requireNonNull(target.getPlayer()).sendMessage(MessageKeys.TAKE_TARGET
+        sendMessageToOfflinePlayer(target, MessageKeys.TAKE_TARGET
                 .getMessage()
                 .replace("{value}", FormatType.format(value)));
     }
@@ -187,7 +187,7 @@ public class CommandToken {
     @Subcommand("top")
     @CommandPermission("ctoken.top")
     public void top(@NotNull CommandSender sender, @Default("5") int value) {
-        handleInvalidValue(sender, value);
+        if (!handleInvalidValue(sender, value)) return;
 
         sender.sendMessage(TokenTop.getTopDatabase(value));
     }
@@ -264,6 +264,8 @@ public class CommandToken {
             player.sendMessage(MessageKeys.NO_VALUE.getMessage());
             return;
         }
+
+        if (!handleMaximumBalanceOnSell(player, totalValue.get())) return;
 
         sendSellMessage(player, itemName, itemsSold.get(), totalValue.get());
         CToken.getDatabase().addToBalance(player, totalValue.get());

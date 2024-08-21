@@ -6,7 +6,6 @@ import net.coma112.ctoken.interfaces.ServerVersionSupport;
 import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
-import org.yaml.snakeyaml.tokens.Token;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -157,6 +157,24 @@ public class MySQL extends AbstractDatabase {
     }
 
     @Override
+    public List<String> getPlayersFromDatabase() {
+        List<String> players = new ArrayList<>();
+        String query = "SELECT PLAYER FROM token";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) players.add(resultSet.getString("PLAYER"));
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+
+        return players;
+    }
+
+    @Override
     public boolean getPayStatus(@NotNull OfflinePlayer player) {
         String query = "SELECT TOGGLE_PAY FROM token WHERE PLAYER = ?";
 

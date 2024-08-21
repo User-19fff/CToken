@@ -40,9 +40,11 @@ message:
   missing-argument: "&e&lTOKEN &8| &cCorrect Usage: {usage}"
   disable-pay: "&e&lTOKEN &8| &cPayment receiving is disabled!"
   enable-pay: "&e&lTOKEN &8| &aPayment receiving is enabled!"
+  invalid-player: "&e&lTOKEN &8| &cTarget is offline!"
   enter-number: "&e&lTOKEN &8| &aEnter a correct number to change the value!"
   not-enough-minimum-payment: "&e&lTOKEN &8| &4{target}&c's minimum payment is &4{value}&c!"
   payment-is-disabled-try: "&e&lTOKEN &8| &4{target} &ccannot receive money!"
+  maximum-balance: "&e&lTOKEN &8| &cYou can't add this much to a balance!"
   token-top:
     header: '&eTop {value} Balances:&f'
     line: '&f{place}. &e{player} &f- &7(&e{balance}&7)'

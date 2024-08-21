@@ -25,6 +25,8 @@ public abstract class AbstractDatabase {
 
     public abstract boolean getPayStatus(@NotNull OfflinePlayer player);
 
+    public abstract List<String> getPlayersFromDatabase();
+
     public abstract void changeMinimumPay(@NotNull OfflinePlayer player, int amount);
 
     public abstract int getMinimumPay(@NotNull OfflinePlayer player);

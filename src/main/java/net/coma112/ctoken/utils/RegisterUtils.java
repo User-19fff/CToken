@@ -6,13 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.reflections.Reflections;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
+import revxrsal.commands.bukkit.exception.InvalidPlayerException;
 import revxrsal.commands.bukkit.exception.SenderNotPlayerException;
 import revxrsal.commands.exception.InvalidNumberException;
 import revxrsal.commands.exception.MissingArgumentException;
 import revxrsal.commands.exception.NoPermissionException;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public final class RegisterUtils {
     public static void registerListeners() {
@@ -47,7 +50,9 @@ public final class RegisterUtils {
         handler.registerExceptionHandler(InvalidNumberException.class, TokenUtils::handleInvalidNumberException);
         handler.registerExceptionHandler(NoPermissionException.class, TokenUtils::handleNoPermissionException);
         handler.registerExceptionHandler(MissingArgumentException.class, TokenUtils::handleMissingArgumentException);
+        handler.registerExceptionHandler(InvalidPlayerException.class, TokenUtils::handleInvalidPlayerException);
         handler.registerBrigadier();
         TokenLogger.info("### Successfully registered exception handlers... ###");
+        handler.getAutoCompleter().registerSuggestion("players", (args, sender, command) -> new ArrayList<>(CToken.getDatabase().getPlayersFromDatabase()));
     }
 }

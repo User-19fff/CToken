@@ -125,6 +125,24 @@ public class SQLite extends AbstractDatabase {
     }
 
     @Override
+    public List<String> getPlayersFromDatabase() {
+        List<String> players = new ArrayList<>();
+        String query = "SELECT PLAYER FROM token";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) players.add(resultSet.getString("PLAYER"));
+            }
+        } catch (SQLException exception) {
+            TokenLogger.error(exception.getMessage());
+        }
+
+        return players;
+    }
+
+    @Override
     public void changeMinimumPay(@NotNull OfflinePlayer player, int amount) {
         String query = "UPDATE token SET MINIMUM_PAY = ? WHERE PLAYER = ?";
 

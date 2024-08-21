@@ -2,6 +2,7 @@ package net.coma112.ctoken.utils;
 
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.enums.FormatType;
+import net.coma112.ctoken.enums.keys.ConfigKeys;
 import net.coma112.ctoken.enums.keys.MessageKeys;
 import net.coma112.ctoken.hooks.Webhook;
 import net.coma112.ctoken.interfaces.PlaceholderProvider;
@@ -10,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.bukkit.core.BukkitActor;
+import revxrsal.commands.bukkit.exception.InvalidPlayerException;
 import revxrsal.commands.bukkit.exception.SenderNotPlayerException;
 import revxrsal.commands.command.CommandActor;
 import revxrsal.commands.exception.InvalidNumberException;
@@ -33,49 +35,87 @@ public final class TokenUtils {
         sendMessage(actor.as(BukkitActor.class), MessageKeys.NO_PERMISSION.getMessage());
     }
 
+    public static void handleInvalidPlayerException(@NotNull CommandActor actor, @NotNull InvalidPlayerException context) {
+        sendMessage(actor.as(BukkitActor.class), MessageKeys.INVALID_PLAYER.getMessage());
+    }
+
     public static void handleMissingArgumentException(@NotNull CommandActor actor, @NotNull MissingArgumentException context) {
         sendMessage(actor.as(BukkitActor.class), MessageKeys.MISSING_ARGUMENT
                 .getMessage()
                 .replace("{usage}", context.getCommand().getUsage()));
     }
 
-    public static void handleNonTarget(@NotNull CommandSender sender, @NotNull OfflinePlayer target) {
+    public static boolean handleNonTarget(@NotNull CommandSender sender, @NotNull OfflinePlayer target) {
         if (!CToken.getDatabase().exists(target)) {
             sender.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
+            return false;
         }
+
+        return true;
     }
 
-    public static void handleNonTarget(@NotNull Player player, @NotNull OfflinePlayer target) {
-        if (!CToken.getDatabase().exists(target)) {
-            player.sendMessage(MessageKeys.TARGET_DONT_EXIST.getMessage());
-            return;
+    public static boolean handleInvalidValue(@NotNull CommandSender sender, int value) {
+        if (value <= 0) {
+            sender.sendMessage(MessageKeys.INVALID_VALUE
+                    .getMessage()
+                    .replace("{value}", FormatType.format(value)));
+            return false;
         }
+
+        return true;
     }
 
-    public static void handleInvalidValue(@NotNull Player player, int value) {
+    public static boolean handleInvalidValue(@NotNull Player player, int value) {
         if (value <= 0) {
             player.sendMessage(MessageKeys.INVALID_VALUE
                     .getMessage()
                     .replace("{value}", FormatType.format(value)));
-            return;
+            return false;
         }
+        return true;
     }
 
-    public static void handleInvalidValue(@NotNull CommandSender sender, int value) {
-        if (value <= 0) {
-            sender.sendMessage(MessageKeys.INVALID_VALUE
-                    .getMessage()
-                    .replace("{value}", FormatType.format(value)));
-            return;
-        }
-    }
-
-    public static void handleNullableValue(@NotNull CommandSender sender, int value) {
+    public static boolean handleNullableValue(@NotNull CommandSender sender, int value) {
         if (value < 0) {
             sender.sendMessage(MessageKeys.INVALID_VALUE
                     .getMessage()
                     .replace("{value}", FormatType.format(value)));
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean handleMaximumBalance(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
+        if (CToken.getDatabase().getBalance(target) + value > ConfigKeys.MAXIMUM_BALANCE.getInt()) {
+            sender.sendMessage(MessageKeys.MAXIMUM_BALANCE.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean handleMaximumBalance(@NotNull Player player, @NotNull OfflinePlayer target, int value) {
+        if (CToken.getDatabase().getBalance(target) + value > ConfigKeys.MAXIMUM_BALANCE.getInt()) {
+            player.sendMessage(MessageKeys.MAXIMUM_BALANCE.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean handleMaximumBalanceOnSell(@NotNull Player player, int value) {
+        if (CToken.getDatabase().getBalance(player) + value > ConfigKeys.MAXIMUM_BALANCE.getInt()) {
+            player.sendMessage(MessageKeys.MAXIMUM_BALANCE.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void sendMessageToOfflinePlayer(@NotNull OfflinePlayer target, @NotNull String message) {
+        if (target.isOnline()) {
+            target.getPlayer().sendMessage(message);
             return;
         }
     }

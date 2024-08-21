@@ -42,6 +42,8 @@ public enum MessageKeys {
     WORTH_TOTAL("message.worth.total"),
     TOKEN_TOP_HEADER("message.token-top.header"),
     TOKEN_TOP_LINE("message.token-top.line"),
+    MAXIMUM_BALANCE("message.maximum-balance"),
+    INVALID_PLAYER("message.invalid-player"),
     HELP("message.help");
 
     private final String path;

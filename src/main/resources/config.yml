@@ -6,9 +6,10 @@
 
 language: "en" # Supported languages -> hu, de, en, tr, es
 starting-balance: 500 # This is the starting balance.
-default-minimum-pay: 1 # This is the default amount of minimium payment receivement in the settings. /token settings to change it.
+default-minimum-pay: 1 # This is the default amount of minimum payment receivement in the settings. /token settings to change it.
 enabled: "&aENABLED" # These two will appear as the status for the 'toggle pay' item in the settings gui.
 disabled: "&cDISABLED"
+maximum-balance: 1000000
 
 database:
   type: "sqlite" # Supported database types -> sqlite, mysql

@@ -10,6 +10,7 @@ public enum ConfigKeys {
     FORMATTING_ENABLED("formatting.enabled"),
     FORMATTING_TYPE("formatting.type"),
     STARTING_BALANCE("starting-balance"),
+    MAXIMUM_BALANCE("maximum-balance"),
 
     ENABLED("enabled"),
     DISABLED("disabled"),
