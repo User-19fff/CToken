@@ -2,6 +2,7 @@ package net.coma112.ctoken.version;
 
 import lombok.Getter;
 import net.coma112.ctoken.CToken;
+import net.coma112.ctoken.enums.VersionType;
 import net.coma112.ctoken.interfaces.ServerVersionSupport;
 import net.coma112.ctoken.utils.TokenLogger;
 import org.bukkit.plugin.Plugin;
@@ -13,8 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 public class VersionSupport {
     private final ServerVersionSupport versionSupport;
 
-    public VersionSupport(@NotNull MinecraftVersion version) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        if (version == MinecraftVersion.UNKNOWN) TokenLogger.error("### VERSION NOT FOUND! ###");
+    public VersionSupport(@NotNull VersionType version) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        if (version == VersionType.UNKNOWN) TokenLogger.error("### VERSION NOT FOUND! ###");
 
 
         Class<?> clazz = Class.forName("net.coma112.ctoken.version.nms." + version.name() + ".ServerVersion");

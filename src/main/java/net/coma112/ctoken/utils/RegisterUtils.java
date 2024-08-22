@@ -3,6 +3,7 @@ package net.coma112.ctoken.utils;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.commands.CommandToken;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.reflections.Reflections;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
@@ -53,6 +54,5 @@ public final class RegisterUtils {
         handler.registerExceptionHandler(InvalidPlayerException.class, TokenUtils::handleInvalidPlayerException);
         handler.registerBrigadier();
         TokenLogger.info("### Successfully registered exception handlers... ###");
-        handler.getAutoCompleter().registerSuggestion("players", (args, sender, command) -> new ArrayList<>(CToken.getDatabase().getPlayersFromDatabase()));
     }
 }

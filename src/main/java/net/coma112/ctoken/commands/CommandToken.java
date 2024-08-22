@@ -151,7 +151,6 @@ public class CommandToken {
     @Subcommand("set")
     @CommandPermission("ctoken.set")
     @Usage("/ctoken set (target) (value)")
-    @AutoComplete("@players")
     public void set(@NotNull CommandSender sender, @NotNull OfflinePlayer target, int value) {
         if (!handleNonTarget(sender, target)) return;
         if (!handleNullableValue(sender, value)) return;
@@ -265,7 +264,7 @@ public class CommandToken {
             return;
         }
 
-        if (!handleMaximumBalanceOnSell(player, totalValue.get())) return;
+        if (!handleMaximumBalance(player, player, totalValue.get())) return;
 
         sendSellMessage(player, itemName, itemsSold.get(), totalValue.get());
         CToken.getDatabase().addToBalance(player, totalValue.get());

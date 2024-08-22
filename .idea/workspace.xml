@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/CToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/AbstractDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/MySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/database/SQLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/ConfigKeys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/keys/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/MinecraftVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/VersionType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,17 +252,17 @@
       <list>
         <item itemvalue="Gradle.CToken [shadowJar]" />
         <item itemvalue="Gradle.CToken [clean]" />
-        <item itemvalue="Gradle.CToken [build]" />
-        <item itemvalue="Gradle.CToken [compileAspectj]" />
         <item itemvalue="Gradle.CToken [publish]" />
+        <item itemvalue="Gradle.CToken [compileAspectj]" />
+        <item itemvalue="Gradle.CToken [build]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -316,6 +314,8 @@
       <workItem from="1724096574907" duration="1957000" />
       <workItem from="1724172683467" duration="173000" />
       <workItem from="1724174413024" duration="1677000" />
+      <workItem from="1724266330224" duration="1272000" />
+      <workItem from="1724318110050" duration="299000" />
     </task>
     <servers />
   </component>

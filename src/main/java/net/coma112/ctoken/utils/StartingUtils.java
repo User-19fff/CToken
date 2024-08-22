@@ -2,11 +2,8 @@ package net.coma112.ctoken.utils;
 
 import lombok.Getter;
 import net.coma112.ctoken.CToken;
-import net.coma112.ctoken.version.MinecraftVersion;
+import net.coma112.ctoken.enums.VersionType;
 import net.coma112.ctoken.version.VersionSupport;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.coma112.ctoken.version.MinecraftVersion.determineVersion;
+import static net.coma112.ctoken.enums.VersionType.determineVersion;
 
 public final class StartingUtils {
     @Getter
@@ -82,9 +79,9 @@ public final class StartingUtils {
                 int majorVersion = Integer.parseInt(matcher.group(1));
                 int minorVersion = Integer.parseInt(matcher.group(2));
                 int patchVersion = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
-                MinecraftVersion version = determineVersion(majorVersion, minorVersion, patchVersion);
+                VersionType version = determineVersion(majorVersion, minorVersion, patchVersion);
 
-                if (version == MinecraftVersion.UNKNOWN) {
+                if (version == VersionType.UNKNOWN) {
                     isSupported = false;
 
                     TokenLogger.error("### Unknown Minecraft version: {}.{}.{} ###", majorVersion, minorVersion, patchVersion);

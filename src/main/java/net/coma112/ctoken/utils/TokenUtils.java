@@ -104,15 +104,6 @@ public final class TokenUtils {
         return true;
     }
 
-    public static boolean handleMaximumBalanceOnSell(@NotNull Player player, int value) {
-        if (CToken.getDatabase().getBalance(player) + value > ConfigKeys.MAXIMUM_BALANCE.getInt()) {
-            player.sendMessage(MessageKeys.MAXIMUM_BALANCE.getMessage());
-            return false;
-        }
-
-        return true;
-    }
-
     public static void sendMessageToOfflinePlayer(@NotNull OfflinePlayer target, @NotNull String message) {
         if (target.isOnline()) {
             target.getPlayer().sendMessage(message);
