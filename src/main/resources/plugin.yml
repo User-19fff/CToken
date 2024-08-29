@@ -1,5 +1,6 @@
 name: CToken
 version: '1.0.0'
 main: net.coma112.ctoken.CToken
+folia-supported: true
 api-version: '1.18'
 authors: [ Coma112 ]

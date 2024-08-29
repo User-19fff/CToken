@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7c1ef4-273e-4f20-86ca-a9a81872c562" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CToken.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/commands/CommandToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/listeners/MenuListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/RegisterUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/StartingUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/utils/TokenUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/MinecraftVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/enums/VersionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/coma112/ctoken/version/VersionSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +307,13 @@
       <workItem from="1724172683467" duration="173000" />
       <workItem from="1724174413024" duration="1677000" />
       <workItem from="1724266330224" duration="1272000" />
-      <workItem from="1724318110050" duration="299000" />
+      <workItem from="1724318110050" duration="808000" />
+      <workItem from="1724358251024" duration="1000" />
+      <workItem from="1724697449720" duration="875000" />
+      <workItem from="1724759040425" duration="9000" />
+      <workItem from="1724759915789" duration="4000" />
+      <workItem from="1724759937767" duration="814000" />
+      <workItem from="1724964352482" duration="1084000" />
     </task>
     <servers />
   </component>

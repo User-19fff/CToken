@@ -3,7 +3,6 @@ package net.coma112.ctoken.utils;
 import net.coma112.ctoken.CToken;
 import net.coma112.ctoken.commands.CommandToken;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.reflections.Reflections;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
@@ -14,9 +13,7 @@ import revxrsal.commands.exception.MissingArgumentException;
 import revxrsal.commands.exception.NoPermissionException;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 public final class RegisterUtils {
     public static void registerListeners() {
